@@ -17,8 +17,6 @@ public class Rabbit : Animal
         wandering = false;
         _currentTarget = null;
         base.Start();
-        _currentTarget = FindTarget("Plant");
-        Debug.Log(_currentTarget.name);
     }
 
     // Update is called once per frame

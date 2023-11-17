@@ -23,7 +23,7 @@ public abstract class Animal : MonoBehaviour
         foreach (Collider collider in hitColliders)
         {
             if (!collider.CompareTag(desiredTag)) continue;
-            Debug.Log(collider.name);
+
             float dist = (transform.position - collider.transform.position).magnitude;
             if (dist < closestDistance)
             {
