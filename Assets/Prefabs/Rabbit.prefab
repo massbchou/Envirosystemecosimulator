@@ -73,6 +73,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   _eatingDistance: 1
+  _maxBelly: 30
 --- !u!1 &5212049319230886837
 GameObject:
   m_ObjectHideFlags: 0
