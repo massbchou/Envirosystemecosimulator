@@ -6,14 +6,23 @@ public class GrowPlants : MonoBehaviour
 {
     //The plant prefab
     public GameObject plantPrefab;
-    public int maxPlants = 10;
-    public float groundx = 10f;
-    public float groundz = 10f;
-    public float groundy = 0.5f;
+    [SerializeField] private GameObject groundPlane;
+    
+    //spawning range
+    private float groundXMin; //left
+    private float groundXMax; //right
+    private float groundZMin; //bottom
+    private float groundZMax; //top
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Get the ground's corners
+        Ground ground = groundPlane.GetComponent<Ground>();
+        groundXMin = ground._corner1.x;
+        groundXMax = ground._corner2.x;
+        groundZMin = ground._corner4.z;
+        groundZMax = ground._corner1.z;
     }
 
     // Update is called once per frame
@@ -33,10 +42,7 @@ public class GrowPlants : MonoBehaviour
     {
         
         //Instantiate a new plant with scale 0.1, at a random position on the ground
-        Instantiate(plantPrefab, new Vector3(Random.Range(-groundx, groundx), groundy, Random.Range(-groundz, groundz)), Quaternion.identity);
+        Instantiate(plantPrefab, new Vector3(Random.Range(groundXMin, groundXMax), 0.5f, Random.Range(groundZMin, groundZMax)), Quaternion.identity);
         
-        
-
-
     }
 }

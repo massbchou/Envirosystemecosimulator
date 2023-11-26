@@ -8,8 +8,6 @@ public class grow : MonoBehaviour
     public float growRate = 0.01f;
     public float maxAgeSeconds = 30f;
     private float age = 0;
-
-    private float deathChanceIncrease = 0.00f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +31,14 @@ public class grow : MonoBehaviour
             Destroy(gameObject);
         }
         
+    }
+    
+    //if colliding with the ground push the plant up
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            transform.position += new Vector3(0, 0.5f, 0);
+        }
     }
 }
