@@ -16,7 +16,7 @@ public class Ground : MonoBehaviour
      */
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //calculate the corners in the world space
         _corner1 = transform.position + new Vector3(-transform.localScale.x / 2, 0, transform.localScale.z / 2);

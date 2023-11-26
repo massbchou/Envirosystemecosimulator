@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7988298621141628742}
   - component: {fileID: 1254851827678207134}
   - component: {fileID: 7470213909207529516}
+  - component: {fileID: 5891553247218232108}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Rabbit
@@ -47,7 +48,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 240
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -69,11 +70,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _senseRadius: 10
-  mask:
+  _eatingDistance: 3
+  _maxBelly: 30
+  _rabbitPrefab: {fileID: 3979611918914344191}
+  _matingTime: 1
+  isMating: 0
+--- !u!65 &5891553247218232108
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979611918914344191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  _eatingDistance: 1
-  _maxBelly: 30
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5212049319230886837
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +106,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8963379828872518504}
   - component: {fileID: 3583473931146914932}
-  - component: {fileID: 4128504657290930950}
   - component: {fileID: 5114284904729592417}
   - component: {fileID: 5768304809230476469}
   m_Layer: 0
@@ -151,27 +172,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4128504657290930950
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5212049319230886837}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &5114284904729592417
 MeshFilter:
   m_ObjectHideFlags: 0
