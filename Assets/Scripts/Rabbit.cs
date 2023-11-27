@@ -72,7 +72,7 @@ public class Rabbit : Animal
         {
 
             wandering = true;
-            _currentTargetPosition = new Vector3(0.5f + transform.position.x + Random.Range(-1f, 1f) * _senseRadius, transform.position.y, 0.5f + transform.position.z + Random.Range(-1f, 1f) * _senseRadius);
+            _currentTargetPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f) * _senseRadius, transform.position.y, transform.position.z + Random.Range(-1f, 1f) * _senseRadius);
             _agent.SetDestination(_currentTargetPosition);
         }
 
