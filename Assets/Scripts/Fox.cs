@@ -41,7 +41,7 @@ public class Fox : Animal
         }
 
         //Find a target if you don't have one
-        if(_currentTarget == null || this.CompareTag(_targetTag))
+        if(_currentTarget == null)
         {
             _currentTarget = FindTarget(_targetTag);
             if (_currentTarget != null)
@@ -124,6 +124,10 @@ public class Fox : Animal
 
         //grow in size by 11%, but not over double
         transform.localScale = new Vector3(Mathf.Max(transform.localScale.x * 1.11f, 1), Mathf.Max(transform.localScale.y * 1.11f, 1), Mathf.Max(transform.localScale.z * 1.11f, 2));
+        if (transform.localScale.z > 2)
+        {
+            transform.localScale = new Vector3(1f, 1f, 2f);
+        }
         _currentTarget = null;
         
     }
