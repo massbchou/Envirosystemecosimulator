@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Rabbit : Animal
 {
+    //stores state of rabbit
+    RabbitAbstractState currentState;
+
+    //all states a rabbit can be in
+    public RabbitIdleState RabbitIdle = new RabbitIdleState();
+    public RabbitMatingState RabbitMating = new RabbitMatingState();
+    public RabbitFleeingState RabbitFleeing = new RabbitFleeingState();
+
     GameObject _currentTarget = null;
     Vector3 _currentTargetPosition;
     [SerializeField] float _eatingDistance = 2f;
@@ -22,6 +30,10 @@ public class Rabbit : Animal
     // Start is called before the first frame update
     void Start()
     {
+        //initialize to idle state
+        currentState = RabbitIdle;
+        currentState.EnterState(this);
+
         _targetTag = "Plant";
         wandering = false;
         _currentTarget = null;
@@ -34,6 +46,9 @@ public class Rabbit : Animal
     // Update is called once per frame
     void Update()
     {
+        //call current state's update function each update
+        currentState.UpdateState(this);
+
         //decrease belly by time
         belly -= Time.deltaTime;
 
@@ -108,6 +123,12 @@ public class Rabbit : Animal
 
         }
         
+    }
+
+    public void SwitchState(RabbitAbstractState state)
+    {
+        currentState = state;
+        currentState.EnterState(this);
     }
 
     //Spawn 0-3 new rabbits

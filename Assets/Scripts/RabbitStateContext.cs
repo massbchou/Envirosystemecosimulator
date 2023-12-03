@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RabbitStateContext : Rabbit
 {
+    /*
     RabbitAbstractState currentState;
 
     //all states a rabbit can be in
@@ -29,4 +30,5 @@ public class RabbitStateContext : Rabbit
         currentState = state;
         currentState.EnterState(this);
     }
+    */
 }

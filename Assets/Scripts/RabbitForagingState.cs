@@ -2,20 +2,20 @@
 //using System.Collections.Generic;
 using UnityEngine;
 
-public class RabbitIdleState : RabbitAbstractState
+public class RabbitForagingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal) //
     {
-        Debug.Log("Rabbit is idle!");
+
     }
 
     public override void UpdateState(Rabbit animal) //
     {
-    
+
     }
 
     public override void OnCollisionEnter(Rabbit animal) //
     {
-    
+
     }
 }
