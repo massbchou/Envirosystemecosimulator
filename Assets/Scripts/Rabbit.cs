@@ -8,15 +8,16 @@ public class Rabbit : Animal
     RabbitAbstractState currentState;
 
     //all states a rabbit can be in
-    public RabbitIdleState RabbitIdle = new RabbitIdleState();
-    public RabbitMatingState RabbitMating = new RabbitMatingState();
-    public RabbitFleeingState RabbitFleeing = new RabbitFleeingState();
+    public RabbitIdleState Idle = new RabbitIdleState();
+    public RabbitMatingState Mating = new RabbitMatingState();
+    public RabbitFleeingState Fleeing = new RabbitFleeingState();
+    public RabbitForagingState Foraging = new RabbitForagingState();
 
     public GameObject _currentTarget = null;
-    Vector3 _currentTargetPosition;
-    [SerializeField] float _eatingDistance = 2f;
-    [SerializeField] float _maxBelly = 10f;
-    private float belly;
+    public Vector3 _currentTargetPosition;
+    [SerializeField] public float _eatingDistance = 2f;
+    [SerializeField] public float _maxBelly = 10f;
+    public float belly; //was private
     bool wandering = false;
 
     [SerializeField] GameObject _rabbitPrefab; //baby to spawn
@@ -30,10 +31,6 @@ public class Rabbit : Animal
     // Start is called before the first frame update
     void Start()
     {
-        //initialize to idle state
-        currentState = RabbitIdle;
-        currentState.EnterState(this);
-
         _targetTag = "Plant";
         wandering = false;
         _currentTarget = null;
@@ -41,6 +38,10 @@ public class Rabbit : Animal
         base.Start();
         belly = _maxBelly;
         _agent.enabled = true;
+
+        //initialize to idle state
+        currentState = Idle;
+        currentState.EnterState(this);
     }
 
     // Update is called once per frame
@@ -58,6 +59,7 @@ public class Rabbit : Animal
         }
 
         //if scale reaches 2 and not very hungry, start searching for mate. Else search for food
+        /*
         if (transform.localScale.z > 2f && belly > _maxBelly / 2)
         {
             _targetTag = "Rabbit";
@@ -66,8 +68,9 @@ public class Rabbit : Animal
         {
             _targetTag = "Plant";
         }
+        */
 
-        //Don't update target or anything esle if you are mating
+        //Don't update target or anything else if you are mating
         if (isMating) return;
 
         //look for target if you don't have one, or if your target is moving
@@ -83,6 +86,7 @@ public class Rabbit : Animal
         }
 
         //no target found, so find a random position
+        /*
         if (_currentTarget == null && !wandering)
         {
 
@@ -90,6 +94,7 @@ public class Rabbit : Animal
             _currentTargetPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f) * _senseRadius, transform.position.y, transform.position.z + Random.Range(-1f, 1f) * _senseRadius);
             _agent.SetDestination(_currentTargetPosition);
         }
+        */
 
 
         float dist = (transform.position - _currentTargetPosition).magnitude;
@@ -98,12 +103,14 @@ public class Rabbit : Animal
             //if searching for plant
             if (_currentTarget != null && _currentTarget.CompareTag("Plant"))
             {
+                /*
                 //Grow in size by 11%, but not over double
                 transform.localScale = new Vector3(Mathf.Max(transform.localScale.x * 1.11f, 1), Mathf.Max(transform.localScale.y * 1.11f, 1), Mathf.Max(transform.localScale.z * 1.11f, 2));
                 
                 //feed 
                 belly = _maxBelly;
                 if (_currentTarget != null) Destroy(_currentTarget);
+                */
             }
             //if searching for mate
             else if(_currentTarget != null && _currentTarget.CompareTag("Rabbit")){
@@ -157,5 +164,30 @@ public class Rabbit : Animal
         _animator.SetBool("isMating", false);
         _agent.enabled = true;
 
+    }
+
+    public bool NeedsToEat()
+    {
+        return belly > _maxBelly / 2;
+    }
+
+    public bool NeedsToFlee()
+    {
+        return false; //temp code
+    }
+
+    public bool WantsToMate()
+    {
+        return transform.localScale.z > 2f && belly > _maxBelly / 2;
+    }
+
+    public bool HasNoGoodTarget()
+    {
+        return _currentTarget == null;
+    }
+
+    public float DistanceTo(Vector3 target)
+    {
+        return Vector3.Distance(transform.position, target);
     }
 }

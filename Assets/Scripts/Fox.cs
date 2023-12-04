@@ -8,7 +8,7 @@ public class Fox : Animal
     FoxAbstractState currentState;
 
     //all states a fox can be in
-    public FoxIdleState FoxIdle = new FoxIdleState();
+    public FoxIdleState Idle = new FoxIdleState();
 
     GameObject _currentTarget = null;
 
@@ -22,10 +22,6 @@ public class Fox : Animal
     // Start is called before the first frame update
     void Start()
     {
-        //initialize to idle state
-        currentState = FoxIdle;
-        currentState.EnterState(this);
-
         _targetTag = "Rabbit";
         wandering = false;
         _currentTarget = null;
@@ -33,6 +29,10 @@ public class Fox : Animal
         _agent.enabled = true;
         belly = _maxBelly;
         ground = GameObject.Find("Ground");
+
+        //initialize to idle state
+        currentState = Idle;
+        currentState.EnterState(this);
     }
 
     // Update is called once per frame

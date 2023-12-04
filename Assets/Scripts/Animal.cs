@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public abstract class Animal : MonoBehaviour
 {
 
-    protected NavMeshAgent _agent;
-    [SerializeField] protected float _senseRadius = 10f;
+    public NavMeshAgent _agent; //was protected
+    [SerializeField] public float _senseRadius = 10f; //was protected
 
     public string _targetTag; //was protected
 
