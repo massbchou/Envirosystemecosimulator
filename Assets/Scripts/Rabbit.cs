@@ -116,7 +116,7 @@ public class Rabbit : Animal
             }
             //if searching for mate
             else if(_currentTarget != null && _currentTarget.CompareTag("Rabbit")){
- 
+                /*
                 //Get the other rabbit and check if it is also searching for a this rabbit
                 Rabbit other = _currentTarget.GetComponent<Rabbit>();
                 if(GameObject.ReferenceEquals(other.CurrentTarget, gameObject))
@@ -124,11 +124,12 @@ public class Rabbit : Animal
                     StartCoroutine(Mate(other));
                     return;
                 }
+                */
             }
 
 
-            wandering = false;
-            _currentTarget = null;
+            //wandering = false;
+            //_currentTarget = null;
 
         }
         
