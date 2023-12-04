@@ -74,6 +74,7 @@ public class Rabbit : Animal
         if (isMating) return;
 
         //look for target if you don't have one, or if your target is moving
+        /*
         if(_currentTarget == null || this.CompareTag(_targetTag))
         {
             _currentTarget = FindTarget(_targetTag);
@@ -84,6 +85,7 @@ public class Rabbit : Animal
                 _agent.SetDestination(_currentTargetPosition);
             }
         }
+        */
 
         //no target found, so find a random position
         /*
@@ -189,5 +191,14 @@ public class Rabbit : Animal
     public float DistanceTo(Vector3 target)
     {
         return Vector3.Distance(transform.position, target);
+    }
+
+    public void GoToTarget()
+    {
+        if (!HasNoGoodTarget())
+        {
+            _currentTargetPosition = _currentTarget.transform.position;
+            _agent.SetDestination(_currentTargetPosition);
+        }
     }
 }

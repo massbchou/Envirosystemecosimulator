@@ -6,7 +6,7 @@ public class RabbitForagingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        Debug.Log("Entered foraging state");
+        //Debug.Log("Entered foraging state");
         animal._currentTarget = animal.FindTarget("Plant");
     }
 
@@ -36,6 +36,9 @@ public class RabbitForagingState : RabbitAbstractState
             animal.belly = animal._maxBelly;
             if (animal._currentTarget != null) Animal.Destroy(animal._currentTarget);
         }
+
+        //go to target
+        animal.GoToTarget();
     }
 
     public override void OnCollisionEnter(Rabbit animal)

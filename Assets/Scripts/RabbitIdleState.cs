@@ -6,7 +6,7 @@ public class RabbitIdleState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        Debug.Log("Entered idle state");
+        //Debug.Log("Entered idle state");
         animal._currentTargetPosition = new Vector3(animal.transform.position.x + Random.Range(-1f, 1f) * animal._senseRadius, animal.transform.position.y, animal.transform.position.z + Random.Range(-1f, 1f) * animal._senseRadius);
         animal._agent.SetDestination(animal._currentTargetPosition);
     }
