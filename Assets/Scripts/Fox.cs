@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Fox : Animal
 {
+    //stores state of fox
+    FoxAbstractState currentState;
+
+    //all states a fox can be in
+    public FoxIdleState FoxIdle = new FoxIdleState();
+
     GameObject _currentTarget = null;
 
     GameObject ground;
@@ -16,6 +22,10 @@ public class Fox : Animal
     // Start is called before the first frame update
     void Start()
     {
+        //initialize to idle state
+        currentState = FoxIdle;
+        currentState.EnterState(this);
+
         _targetTag = "Rabbit";
         wandering = false;
         _currentTarget = null;
@@ -68,6 +78,12 @@ public class Fox : Animal
             
         
 
+    }
+
+    public void SwitchState(FoxAbstractState state)
+    {
+        currentState = state;
+        currentState.EnterState(this);
     }
 
     private void wander()

@@ -9,7 +9,7 @@ public abstract class Animal : MonoBehaviour
     protected NavMeshAgent _agent;
     [SerializeField] protected float _senseRadius = 10f;
 
-    protected string _targetTag;
+    public string _targetTag; //was protected
 
     protected Animator _animator;
 
@@ -23,7 +23,7 @@ public abstract class Animal : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();  
     }
 
-    protected GameObject FindTarget(string desiredTag)
+    public GameObject FindTarget(string desiredTag) //was protected
     {
         if (string.IsNullOrEmpty(this.tag) || string.IsNullOrEmpty(desiredTag)) return null;
 

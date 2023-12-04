@@ -12,7 +12,7 @@ public class Rabbit : Animal
     public RabbitMatingState RabbitMating = new RabbitMatingState();
     public RabbitFleeingState RabbitFleeing = new RabbitFleeingState();
 
-    GameObject _currentTarget = null;
+    public GameObject _currentTarget = null;
     Vector3 _currentTargetPosition;
     [SerializeField] float _eatingDistance = 2f;
     [SerializeField] float _maxBelly = 10f;
