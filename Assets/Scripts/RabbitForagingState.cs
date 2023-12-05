@@ -24,6 +24,7 @@ public class RabbitForagingState : RabbitAbstractState
         else if (animal.HasNoGoodTarget())
         {
             animal._currentTarget = animal.FindTarget("Plant");
+            //add: if it can't, switch to Idle
         }
 
         //eat if able
