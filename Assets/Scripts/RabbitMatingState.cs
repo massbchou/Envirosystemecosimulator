@@ -17,7 +17,7 @@ public class RabbitMatingState : RabbitAbstractState
         {
             animal.SwitchState(animal.Fleeing);
         }
-        else if (animal.NeedsToEat())
+        else if (animal.BadlyNeedsToEat())
         {
             animal.SwitchState(animal.Foraging);
         }

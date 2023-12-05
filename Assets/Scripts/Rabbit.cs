@@ -171,8 +171,15 @@ public class Rabbit : Animal
 
     public bool NeedsToEat()
     {
-        return belly > _maxBelly / 2;
+        return belly < _maxBelly / 2;
     }
+
+
+    public bool BadlyNeedsToEat()
+    {
+        return belly < _maxBelly / 4;
+    }
+
 
     public bool NeedsToFlee()
     {
@@ -181,7 +188,7 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        return transform.localScale.z > 2f && belly > _maxBelly / 2;
+        return transform.localScale.z > 2f && belly > _maxBelly / 4;
     }
 
     public bool HasNoGoodTarget()
