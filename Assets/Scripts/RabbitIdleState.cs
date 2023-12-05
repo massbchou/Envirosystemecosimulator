@@ -18,11 +18,11 @@ public class RabbitIdleState : RabbitAbstractState
         {
             animal.SwitchState(animal.Fleeing);
         }
-        else if (animal.NeedsToEat()) //add and sees a plant to NeedsToEat()
+        else if (animal.NeedsToEat())
         {
             animal.SwitchState(animal.Foraging);
         }
-        else if (animal.WantsToMate()) //add and sees a rabbit to WantsToMate()
+        else if (animal.WantsToMate())
         {
             animal.SwitchState(animal.Mating);
         }
