@@ -35,7 +35,7 @@ public class RabbitForagingState : RabbitAbstractState
 
             //feed 
             animal.belly = animal._maxBelly;
-            if (animal._currentTarget != null) Animal.Destroy(animal._currentTarget);//.transform.parent.gameObject);
+            if (animal._currentTarget != null) Animal.Destroy(animal._currentTarget.transform.parent.gameObject);
         }
 
         //go to target
