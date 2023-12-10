@@ -17,7 +17,7 @@ public class RabbitForagingState : RabbitAbstractState
         {
             animal.SwitchState(animal.Fleeing);
         }
-        else if (!animal.NeedsToEat())
+        else if (!animal.NeedsToEat() || !animal.SeesFood())
         {
             animal.SwitchState(animal.Idle);
         }

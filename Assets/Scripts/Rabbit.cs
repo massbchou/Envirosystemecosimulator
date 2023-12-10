@@ -141,9 +141,13 @@ public class Rabbit : Animal
     {
         Debug.Log("rabbits mating");
         isMating = true;
+        other.isMating = true;
 
         _agent.enabled = false;
+        other._agent.enabled = false;
+
         _animator.SetBool("isMating", true);
+        other._animator.SetBool("isMating", true);
 
         yield return new WaitForSeconds(_matingTime);
 
@@ -157,25 +161,35 @@ public class Rabbit : Animal
         }
 
         isMating = false;
+        other.isMating = false;
 
 
         //wandering = false;
         _currentTarget = null;
 
         _animator.SetBool("isMating", false);
+        other._animator.SetBool("isMating", false);
+
         _agent.enabled = true;
+        other._agent.enabled = true;
 
     }
 
     public bool NeedsToEat()
     {
-        return belly < _maxBelly / 2 && FindTarget("Plant") != null;
+        return belly < _maxBelly / 2;
     }
 
 
     public bool BadlyNeedsToEat()
     {
         return belly < _maxBelly / 4;
+    }
+
+
+    public bool SeesFood()
+    {
+        return FindTarget("Plant") != null;
     }
 
 
@@ -186,9 +200,14 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        //Debug.Log(FindTarget("Rabbit") != null ? "Found love" : "Too alone");
         _readyToMate = transform.localScale.z > 2f && !NeedsToFlee() && !BadlyNeedsToEat();
-        return _readyToMate && FindTarget("Rabbit") != null;
+        return _readyToMate;
+    }
+
+
+    public bool SeesMate()
+    {
+        return FindTarget("Rabbit") != null;
     }
 
     public float DistanceTo(Vector3 target)
