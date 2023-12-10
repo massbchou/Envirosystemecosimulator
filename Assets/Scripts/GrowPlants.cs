@@ -13,6 +13,7 @@ public class GrowPlants : MonoBehaviour
     private float groundXMax; //right
     private float groundZMin; //bottom
     private float groundZMax; //top
+    private Vector3 groundCenter;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class GrowPlants : MonoBehaviour
         groundXMax = ground._corner2.x;
         groundZMin = ground._corner4.z;
         groundZMax = ground._corner1.z;
+        groundCenter = ground._center;
     }
 
     // Update is called once per frame
