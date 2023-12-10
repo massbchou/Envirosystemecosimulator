@@ -28,6 +28,11 @@ public class ItemPlacer : MonoBehaviour
         _plantButton.onClick.AddListener(SelectPlant);
         _rabbitButton.onClick.AddListener(SelectRabbit);
         _foxButton.onClick.AddListener(SelectFox);
+
+        _foxButton.gameObject.SetActive(false);
+        _rabbitButton.gameObject.SetActive(false);
+        _plantButton.gameObject.SetActive(false);
+
     }
 
     void SelectPlant()
@@ -43,6 +48,19 @@ public class ItemPlacer : MonoBehaviour
     void SelectFox()
     {
         _currentSelection = _fox;
+    }
+
+    public void EnablePlantButton()
+    {
+        _plantButton.gameObject.SetActive(true);
+    }
+    public void EnableRabbitButton()
+    {
+        _rabbitButton.gameObject.SetActive(true);
+    }
+    public void EnableFoxButton()
+    {
+        _foxButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
