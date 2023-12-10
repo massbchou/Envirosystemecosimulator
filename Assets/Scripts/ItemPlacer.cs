@@ -70,8 +70,12 @@ public class ItemPlacer : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitData;
-            if (Physics.Raycast(ray, out hitData, 1000, ground))
+            if (Physics.Raycast(ray, out hitData, 1000))
             {
+                if (hitData.collider.gameObject.CompareTag(_currentSelection.tag))
+                {
+                    return;
+                }
                 Vector3 worldPosition = hitData.point;
                 Instantiate(_currentSelection, worldPosition + Vector3.up * 0.1f, Quaternion.identity);
 
