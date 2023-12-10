@@ -6,7 +6,7 @@ public class RabbitForagingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        //Debug.Log("Entered foraging state");
+        Debug.Log("Entered foraging state");
         animal._currentTarget = animal.FindTarget("Plant");
     }
 
@@ -35,7 +35,7 @@ public class RabbitForagingState : RabbitAbstractState
 
             //feed 
             animal.belly = animal._maxBelly;
-            if (animal._currentTarget != null) Animal.Destroy(animal._currentTarget);
+            if (animal._currentTarget != null) Animal.Destroy(animal._currentTarget);//.transform.parent.gameObject);
         }
 
         //go to target

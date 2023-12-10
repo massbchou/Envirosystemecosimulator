@@ -6,7 +6,8 @@ public class RabbitIdleState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        //Debug.Log("Entered idle state");
+        Debug.Log("Entered idle state");
+        animal._currentTarget = animal.gameObject; //when the target isn't another game object, set it to the animal itself to fix HasNoGoodTargets()
         animal._currentTargetPosition = new Vector3(animal.transform.position.x + Random.Range(-1f, 1f) * animal._senseRadius, animal.transform.position.y, animal.transform.position.z + Random.Range(-1f, 1f) * animal._senseRadius);
         animal._agent.SetDestination(animal._currentTargetPosition);
     }
@@ -26,8 +27,9 @@ public class RabbitIdleState : RabbitAbstractState
         {
             animal.SwitchState(animal.Mating);
         }
-        else if (animal.DistanceTo(animal._currentTargetPosition) < 2f)
+        else if (animal.DistanceTo(animal._currentTargetPosition) < 2f || animal.HasNoGoodTarget())
         {
+            animal._currentTarget = animal.gameObject;
             animal._currentTargetPosition = new Vector3(animal.transform.position.x + Random.Range(-1f, 1f) * animal._senseRadius, animal.transform.position.y, animal.transform.position.z + Random.Range(-1f, 1f) * animal._senseRadius);
             animal._agent.SetDestination(animal._currentTargetPosition);
         }
@@ -35,6 +37,6 @@ public class RabbitIdleState : RabbitAbstractState
 
     public override void OnCollisionEnter(Rabbit animal)
     {
-    
+        
     }
 }

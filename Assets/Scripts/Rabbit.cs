@@ -13,12 +13,9 @@ public class Rabbit : Animal
     public RabbitFleeingState Fleeing = new RabbitFleeingState();
     public RabbitForagingState Foraging = new RabbitForagingState();
 
-    public GameObject _currentTarget = null;
-    public Vector3 _currentTargetPosition;
     [SerializeField] public float _eatingDistance = 2f;
     [SerializeField] public float _maxBelly = 10f;
     public float belly; //was private
-    bool wandering = false;
 
     [SerializeField] GameObject _rabbitPrefab; //baby to spawn
 
@@ -32,8 +29,6 @@ public class Rabbit : Animal
     void Start()
     {
         _targetTag = "Plant";
-        wandering = false;
-        _currentTarget = null;
         isMating = false;
         base.Start();
         belly = _maxBelly;
@@ -154,14 +149,14 @@ public class Rabbit : Animal
         for (int i = 0; i < Random.Range(1, 3); ++i)
         {
             GameObject newRabbit = Instantiate(_rabbitPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
-            newRabbit.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+            newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         belly /= 2;
         isMating = false;
 
 
-        wandering = false;
+        //wandering = false;
         _currentTarget = null;
 
         _animator.SetBool("isMating", false);
@@ -188,12 +183,9 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        return transform.localScale.z > 2f && belly > _maxBelly / 4 && FindTarget("Rabbit") != null;
-    }
-
-    public bool HasNoGoodTarget()
-    {
-        return _currentTarget == null;
+        //Debug.Log(FindTarget("Rabbit") != null ? "Found love" : "Too alone");
+        _readyToMate = transform.localScale.z > 2f && !NeedsToFlee() && !BadlyNeedsToEat();
+        return _readyToMate && FindTarget("Rabbit") != null;
     }
 
     public float DistanceTo(Vector3 target)

@@ -7,11 +7,18 @@ public abstract class Animal : MonoBehaviour
 {
 
     public NavMeshAgent _agent; //was protected
-    [SerializeField] public float _senseRadius = 10f; //was protected
+    [SerializeField] public float _senseRadius = 25f; //was protected, was 10
 
     public string _targetTag; //was protected
 
     protected Animator _animator;
+
+    public Ground _ground;
+
+    public GameObject _currentTarget = null;
+    public Vector3 _currentTargetPosition;
+
+    public bool _readyToMate = false; //
 
     //getters and setters
     public string TargetTag { get { return _targetTag; } set { _targetTag = value; } }
@@ -21,6 +28,9 @@ public abstract class Animal : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _agent = GetComponent<NavMeshAgent>();  
+        _ground = GameObject.Find("Ground").GetComponent<Ground>();
+
+        _currentTarget = null;
     }
 
     public GameObject FindTarget(string desiredTag) //was protected
@@ -40,8 +50,10 @@ public abstract class Animal : MonoBehaviour
             if (this.CompareTag(desiredTag))
             {
                 Animal other = collider.GetComponent<Animal>();
-                if (other == null || string.IsNullOrEmpty(other.TargetTag)) continue;
-                if (!this.CompareTag(other.TargetTag)) continue;
+                if (other == null) continue;
+                Debug.Log("Found another rabbit");
+                if (!other._readyToMate) continue;
+                Debug.Log("Rabbit was interested");
             }
 
             //get distance to find closest
@@ -55,6 +67,13 @@ public abstract class Animal : MonoBehaviour
 
         if (closest == null) return null;
         return closest.gameObject;
+    }
+
+    public bool HasNoGoodTarget()
+    {
+        return _currentTarget == null ||
+            (_ground._corner1.x >= _currentTargetPosition.x) || (_ground._corner2.x <= _currentTargetPosition.x) ||
+            (_ground._corner4.z >= _currentTargetPosition.z) || (_ground._corner1.z <= _currentTargetPosition.z);
     }
 
 

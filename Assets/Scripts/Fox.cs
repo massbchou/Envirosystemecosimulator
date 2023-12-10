@@ -10,10 +10,7 @@ public class Fox : Animal
     //all states a fox can be in
     public FoxIdleState Idle = new FoxIdleState();
 
-    GameObject _currentTarget = null;
-
     GameObject ground;
-    Vector3 _currentTargetPosition;
     bool wandering = false;
     private float belly;
     [SerializeField] float _eatingDistance = 3f;
@@ -24,7 +21,6 @@ public class Fox : Animal
     {
         _targetTag = "Rabbit";
         wandering = false;
-        _currentTarget = null;
         base.Start();
         _agent.enabled = true;
         belly = _maxBelly;
