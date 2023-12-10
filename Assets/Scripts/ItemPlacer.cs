@@ -99,7 +99,9 @@ public class ItemPlacer : MonoBehaviour
                 if (!hitData.collider.gameObject.CompareTag(_currentSelection.tag))
                 {
                     Vector3 worldPosition = hitData.point;
-                    Instantiate(_currentSelection, worldPosition + Vector3.up * 0.1f, Quaternion.identity);
+                   //Vector3 normal = hit.normal;
+
+                    Instantiate(_currentSelection, worldPosition + Vector3.up * 0.7f, Quaternion.identity);
                 }
             }
         }
