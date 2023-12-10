@@ -119,7 +119,7 @@ public class Rabbit : Animal
 
     public bool NeedsToFlee()
     {
-        return false; //temp code
+        return FindTarget("Fox");
     }
 
     public bool WantsToMate()
@@ -145,6 +145,17 @@ public class Rabbit : Animal
         {
             _currentTargetPosition = _currentTarget.transform.position;
             _agent.SetDestination(_currentTargetPosition);
+        }
+    }
+
+    public void GoAwayFromTarget()
+    {
+        if (!HasNoGoodTarget())
+        {
+            _currentTargetPosition = _currentTarget.transform.position;
+            Vector3 directionToFox = _currentTargetPosition - transform.position;
+            Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
+            _agent.SetDestination(transform.position + directionAwayFromFox);
         }
     }
 }

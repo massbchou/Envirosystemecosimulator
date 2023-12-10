@@ -6,7 +6,8 @@ public class RabbitFleeingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-
+        Debug.Log("Entered fleeing state");
+        animal._currentTarget = animal.FindTarget("Fox");
     }
 
     public override void UpdateState(Rabbit animal)
@@ -16,6 +17,12 @@ public class RabbitFleeingState : RabbitAbstractState
         {
             animal.SwitchState(animal.Idle);
         }
+        else
+        {
+            animal._currentTarget = animal.FindTarget("Fox");
+        }
+
+        animal.GoAwayFromTarget();
     }
 
     public override void OnCollisionEnter(Rabbit animal)
