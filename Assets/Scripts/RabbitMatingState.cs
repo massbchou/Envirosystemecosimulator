@@ -35,10 +35,9 @@ public class RabbitMatingState : RabbitAbstractState
         {
             //Get the other rabbit and check if it is also searching for a this rabbit
             Rabbit other = animal._currentTarget.GetComponent<Rabbit>();
-            if (GameObject.ReferenceEquals(other.CurrentTarget, animal))
+            if (other != null && other._readyToMate && !other.isMating && !animal.isMating)
             {
                 animal.StartCoroutine(animal.Mate(other));
-                //return;
             }
         }
 

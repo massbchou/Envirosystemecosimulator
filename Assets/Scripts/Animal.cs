@@ -7,7 +7,7 @@ public abstract class Animal : MonoBehaviour
 {
 
     public NavMeshAgent _agent; //was protected
-    [SerializeField] public float _senseRadius = 25f; //was protected, was 10
+    [SerializeField] public float _senseRadius = 10f; //was protected
 
     public string _targetTag; //was protected
 
@@ -18,7 +18,7 @@ public abstract class Animal : MonoBehaviour
     public GameObject _currentTarget = null;
     public Vector3 _currentTargetPosition;
 
-    public bool _readyToMate = false; //
+    public bool _readyToMate;
 
     //getters and setters
     public string TargetTag { get { return _targetTag; } set { _targetTag = value; } }
@@ -31,6 +31,8 @@ public abstract class Animal : MonoBehaviour
         _ground = GameObject.Find("Ground").GetComponent<Ground>();
 
         _currentTarget = null;
+
+        _readyToMate = false;
     }
 
     public GameObject FindTarget(string desiredTag) //was protected
@@ -51,9 +53,7 @@ public abstract class Animal : MonoBehaviour
             {
                 Animal other = collider.GetComponent<Animal>();
                 if (other == null) continue;
-                Debug.Log("Found another rabbit");
                 if (!other._readyToMate) continue;
-                Debug.Log("Rabbit was interested");
             }
 
             //get distance to find closest

@@ -27,7 +27,7 @@ public class RabbitIdleState : RabbitAbstractState
         {
             animal.SwitchState(animal.Mating);
         }
-        else if (animal.DistanceTo(animal._currentTargetPosition) < 2f || animal.HasNoGoodTarget())
+        else if (animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance || animal.HasNoGoodTarget())
         {
             animal._currentTarget = animal.gameObject;
             animal._currentTargetPosition = new Vector3(animal.transform.position.x + Random.Range(-1f, 1f) * animal._senseRadius, animal.transform.position.y, animal.transform.position.z + Random.Range(-1f, 1f) * animal._senseRadius);

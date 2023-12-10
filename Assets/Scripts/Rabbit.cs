@@ -66,7 +66,7 @@ public class Rabbit : Animal
         */
 
         //Don't update target or anything else if you are mating
-        if (isMating) return;
+        //if (isMating) return;
 
         //look for target if you don't have one, or if your target is moving
         /*
@@ -139,6 +139,7 @@ public class Rabbit : Animal
     //Spawn 0-3 new rabbits
     public IEnumerator Mate(Rabbit other)
     {
+        Debug.Log("rabbits mating");
         isMating = true;
 
         _agent.enabled = false;
@@ -146,13 +147,15 @@ public class Rabbit : Animal
 
         yield return new WaitForSeconds(_matingTime);
 
+        belly /= 2;
+        other.belly /= 2;
+
         for (int i = 0; i < Random.Range(1, 3); ++i)
         {
             GameObject newRabbit = Instantiate(_rabbitPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
             newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        belly /= 2;
         isMating = false;
 
 
