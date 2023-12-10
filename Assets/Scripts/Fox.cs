@@ -38,6 +38,7 @@ public class Fox : Animal
         if (belly < 0)
         {
              Destroy(gameObject);
+            return;
         }
 
         //continuously update target (as rabbits are moving)
