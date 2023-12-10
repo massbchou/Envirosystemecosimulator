@@ -88,7 +88,7 @@ public class Rabbit : Animal
                 
                 //feed 
                 belly = _maxBelly;
-                if (_currentTarget != null) Destroy(_currentTarget);
+                if (_currentTarget != null) Destroy(_currentTarget.transform.parent.gameObject);
             }
             //if searching for mate
             else if(_currentTarget != null && _currentTarget.CompareTag("Rabbit")){
@@ -123,7 +123,7 @@ public class Rabbit : Animal
         for (int i = 0; i < Random.Range(1, 3); ++i)
         {
             GameObject newRabbit = Instantiate(_rabbitPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
-            newRabbit.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+            newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         belly /= 2;
