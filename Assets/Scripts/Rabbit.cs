@@ -10,6 +10,7 @@ public class Rabbit : Animal
     [SerializeField] float _maxBelly = 10f;
     private float belly;
     bool wandering = false;
+    private bool isBrown = false;
 
     [SerializeField] GameObject _rabbitPrefab; //baby to spawn
 
@@ -29,6 +30,23 @@ public class Rabbit : Animal
         base.Start();
         belly = _maxBelly;
         _agent.enabled = true;
+        //randomly pick brown or white using a ternary operator
+        isBrown = Random.Range(0, 4) == 0 ? true : false;
+        if (isBrown)
+        {
+            //set color to a brown
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(0.5f, 0.25f, 0f);
+            //vary each value by up to 0.1
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color += new Color(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f));
+        }
+        else
+        {
+            //set color to a random shade of white to black
+            float color = Random.Range(0f, 1f);
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(color, color, color);
+        }
+        
+        
     }
 
     // Update is called once per frame
