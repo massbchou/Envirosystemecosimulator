@@ -18,14 +18,17 @@ public class RabbitIdleState : RabbitAbstractState
         if (animal.NeedsToFlee())
         {
             animal.SwitchState(animal.Fleeing);
+            return;
         }
         else if (animal.NeedsToEat() && animal.SeesFood())
         {
             animal.SwitchState(animal.Foraging);
+            return;
         }
         else if (animal.WantsToMate() && animal.SeesMate())
         {
             animal.SwitchState(animal.Mating);
+            return;
         }
         else if (animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance || animal.HasNoGoodTarget())
         {
