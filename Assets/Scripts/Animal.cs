@@ -28,8 +28,8 @@ public abstract class Animal : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _agent = GetComponent<NavMeshAgent>();  
-        _ground = GameObject.Find("Ground").GetComponent<Ground>();
-
+/*        _ground = GameObject.Find("Ground").GetComponent<Ground>();
+*/
         _currentTarget = null;
 
         _readyToMate = false;
@@ -71,9 +71,9 @@ public abstract class Animal : MonoBehaviour
 
     public bool HasNoGoodTarget()
     {
-        return _currentTarget == null ||
+        return _currentTarget == null; /* ||
             (_ground._corner1.x >= _currentTargetPosition.x) || (_ground._corner2.x <= _currentTargetPosition.x) ||
-            (_ground._corner4.z >= _currentTargetPosition.z) || (_ground._corner1.z <= _currentTargetPosition.z);
+            (_ground._corner4.z >= _currentTargetPosition.z) || (_ground._corner1.z <= _currentTargetPosition.z);*/
     }
 
 

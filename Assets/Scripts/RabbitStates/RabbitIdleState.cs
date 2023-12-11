@@ -31,6 +31,7 @@ public class RabbitIdleState : RabbitAbstractState
         {
             animal._currentTarget = animal.gameObject;
             animal._currentTargetPosition = new Vector3(animal.transform.position.x + Random.Range(-1f, 1f) * animal._senseRadius, animal.transform.position.y, animal.transform.position.z + Random.Range(-1f, 1f) * animal._senseRadius);
+            animal._currentTargetPosition.y = Terrain.activeTerrain.SampleHeight(animal._currentTargetPosition);
             animal._agent.SetDestination(animal._currentTargetPosition);
         }
     }
