@@ -101,8 +101,8 @@ public class Rabbit : Animal
             //if searching for plant
             if (_currentTarget != null && _currentTarget.CompareTag("Plant"))
             {
-                //Grow in size by 11%, but not over double
-                transform.localScale = new Vector3(Mathf.Max(transform.localScale.x * 1.11f, 1), Mathf.Max(transform.localScale.y * 1.11f, 1), Mathf.Max(transform.localScale.z * 1.11f, 2));
+                //Grow in size by 5%, but not over double
+                transform.localScale = new Vector3(Mathf.Min(transform.localScale.x * 1.05f, 2), Mathf.Min(transform.localScale.y * 1.05f, 2), Mathf.Min(transform.localScale.z * 1.05f, 2));
                 
                 //feed 
                 belly = _maxBelly;

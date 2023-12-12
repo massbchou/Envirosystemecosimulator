@@ -8,19 +8,20 @@ public class grow : MonoBehaviour
     public float growRate = 1f;
     public float maxAgeSeconds = 30f;
     public float sizeVariancePercentage = 0.25f;
+    public float startingScale = 0.1f;
     private float age = 0;
     // Start is called before the first frame update
     void Start()
     {
-        //set current scale to 0.1
-        transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        //set current scale of this object and its children to startingScale
+        transform.localScale = new Vector3(startingScale, startingScale, startingScale);
         
         //reduce the maxScale by a random percentage up to sizeVariancePercentage
-/*        maxScale *= 1 - Random.Range(0, sizeVariancePercentage);
+        maxScale *= 1 - Random.Range(0, sizeVariancePercentage);
         if (maxScale < 0)
         {
             maxScale = 0.1f;
-        }*/
+        }
     }
 
     // Update is called once per frame
@@ -31,7 +32,6 @@ public class grow : MonoBehaviour
         //increase scale until it reaches maxScale
         if (transform.localScale.x < maxScale)
         {
-            Debug.Log("here");
             transform.localScale += new Vector3(growRate * Time.deltaTime, growRate * Time.deltaTime, growRate * Time.deltaTime);
         }
         
