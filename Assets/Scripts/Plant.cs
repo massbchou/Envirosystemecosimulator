@@ -5,7 +5,7 @@ using UnityEngine;
 public class grow : MonoBehaviour
 {
     public float maxScale = 2f;
-    public float growRate = 0.01f;
+    public float growRate = 1f;
     public float maxAgeSeconds = 30f;
     public float sizeVariancePercentage = 0.25f;
     private float age = 0;
@@ -13,14 +13,14 @@ public class grow : MonoBehaviour
     void Start()
     {
         //set current scale to 0.1
-        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         
         //reduce the maxScale by a random percentage up to sizeVariancePercentage
-        maxScale *= 1 - Random.Range(0, sizeVariancePercentage);
+/*        maxScale *= 1 - Random.Range(0, sizeVariancePercentage);
         if (maxScale < 0)
         {
             maxScale = 0.1f;
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -31,7 +31,8 @@ public class grow : MonoBehaviour
         //increase scale until it reaches maxScale
         if (transform.localScale.x < maxScale)
         {
-            transform.localScale += new Vector3(growRate, growRate, growRate);
+            Debug.Log("here");
+            transform.localScale += new Vector3(growRate * Time.deltaTime, growRate * Time.deltaTime, growRate * Time.deltaTime);
         }
         
 

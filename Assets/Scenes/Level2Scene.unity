@@ -144,14 +144,17 @@ MonoBehaviour:
     name: David Attenborough
     sentences:
     - Hello There.
+    audioClips: []
   funFact1:
     name: David Attenborough
     sentences:
     - You've seen rabbits before
+    audioClips: []
   funFact2:
     name: David Attenborough
     sentences:
     - Now you can place foxes
+    audioClips: []
 --- !u!1 &390363998
 GameObject:
   m_ObjectHideFlags: 0

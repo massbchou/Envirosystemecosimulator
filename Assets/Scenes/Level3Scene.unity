@@ -123,6 +123,35 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &526005408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7221064722879614771, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+  m_PrefabInstance: {fileID: 925986231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &526005410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526005408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa60f79ad8ba7f4b99a01cb27c74cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introDialogue:
+    name: David Attenborough
+    sentences:
+    - Welcome to snow world
+  funFact1:
+    name: David Attenborough
+    sentences:
+    - Rabbits.
+  funFact2:
+    name: David Attenborough
+    sentences:
+    - Fox.
 --- !u!1001 &655657577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,10 +269,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7221064722879614771, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 526005410}
   m_SourcePrefab: {fileID: 100100000, guid: ffeb2306e8388604d88102892c770f44, type: 3}
 --- !u!1001 &1256323920
 PrefabInstance:
