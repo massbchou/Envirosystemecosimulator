@@ -6,7 +6,7 @@ public class RabbitForagingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        Debug.Log("Entered foraging state");
+        Debug.Log("Rabbit entered foraging state");
         animal._currentTarget = animal.FindTarget("Plant");
     }
 
@@ -26,7 +26,10 @@ public class RabbitForagingState : RabbitAbstractState
         else if (animal.HasNoGoodTarget())
         {
             animal._currentTarget = animal.FindTarget("Plant");
-            //add: if it can't, switch to Idle
+            if (animal._currentTarget == null)
+            {
+                animal.SwitchState(animal.Idle);
+            }
         }
 
         //eat if able

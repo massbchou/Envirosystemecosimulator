@@ -9,11 +9,13 @@ public class Fox : Animal
 
     //all states a fox can be in
     public FoxIdleState Idle = new FoxIdleState();
+    public FoxChasingState Chasing = new FoxChasingState();
+    public FoxMatingState Mating = new FoxMatingState();
 
     GameObject ground;
     bool wandering = false;
     private float belly;
-    [SerializeField] float _eatingDistance = 3f;
+    [SerializeField] public float _eatingDistance = 3f;
     [SerializeField] float _maxBelly = 20f;
 
     // Start is called before the first frame update
@@ -34,6 +36,9 @@ public class Fox : Animal
     // Update is called once per frame
     void Update()
     {
+        //call current state's update function each update
+        currentState.UpdateState(this);
+
         belly -= Time.deltaTime;
         if (belly < 0)
         {
@@ -42,6 +47,7 @@ public class Fox : Animal
         }
 
         //continuously update target (as rabbits are moving)
+        /*
         _currentTarget = FindTarget(_targetTag);
         if (_currentTarget != null)
         {
@@ -49,17 +55,21 @@ public class Fox : Animal
             _currentTargetPosition = _currentTarget.transform.position;
             _agent.SetDestination(_currentTargetPosition);
         }
+        */
    
 
         //no target, wander
+        /*
         if(_currentTarget == null && !wandering)
         {
             wander();
         }
+        */
 
         //get distance to target
-        float distance = (_currentTargetPosition - transform.position).magnitude;
+        //float distance = (_currentTargetPosition - transform.position).magnitude;
         //if we are close enough to target, eat or mate
+        /*
         if (distance < _eatingDistance)
         {
             if(_currentTarget == null)
@@ -71,6 +81,7 @@ public class Fox : Animal
                 eatRabbit(_currentTarget);
             }
         }
+        */
 
             
         
@@ -90,7 +101,7 @@ public class Fox : Animal
         _agent.SetDestination(_currentTargetPosition);
     }
 
-    private void eatRabbit(GameObject rabbit)
+    public void eatRabbit(GameObject rabbit)
     {
         //kill rabbit and increase hunger
         Destroy(rabbit);
@@ -106,5 +117,48 @@ public class Fox : Animal
         }
         _currentTarget = null;
         wandering = false;
+    }
+
+    public bool NeedsToEat()
+    {
+        return belly < _maxBelly / 2;
+    }
+
+
+    public bool BadlyNeedsToEat()
+    {
+        return belly < _maxBelly / 4;
+    }
+
+
+    public bool SeesFood()
+    {
+        return FindTarget("Rabbit") != null;
+    }
+
+    public bool WantsToMate()
+    {
+        _readyToMate = transform.localScale.z > 2f && !BadlyNeedsToEat();
+        return _readyToMate;
+    }
+
+
+    public bool SeesMate()
+    {
+        return FindTarget("Fox") != null;
+    }
+
+    public float DistanceTo(Vector3 target)
+    {
+        return Vector3.Distance(transform.position, target);
+    }
+
+    public void GoToTarget()
+    {
+        if (!HasNoGoodTarget())
+        {
+            _currentTargetPosition = _currentTarget.transform.position;
+            _agent.SetDestination(_currentTargetPosition);
+        }
     }
 }

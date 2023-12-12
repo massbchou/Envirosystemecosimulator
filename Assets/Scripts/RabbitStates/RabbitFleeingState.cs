@@ -6,7 +6,7 @@ public class RabbitFleeingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        Debug.Log("Entered fleeing state");
+        Debug.Log("Rabbit entered fleeing state");
         animal._currentTarget = animal.FindTarget("Fox");
     }
 
