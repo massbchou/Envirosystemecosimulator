@@ -21,15 +21,12 @@ public class Rabbit : Animal
 
     [SerializeField] float _matingTime = 1f; //time it takes to mate
 
-    public bool isMating = false; //variable that is true through the duration of the mate coroutine
-
     public GameObject CurrentTarget{ get { return _currentTarget; } set { _currentTarget = value; }} //getter and setter for current target 
 
     // Start is called before the first frame update
     void Start()
     {
         _targetTag = "Plant";
-        isMating = false;
         base.Start();
         belly = _maxBelly;
         _agent.enabled = true;
@@ -122,7 +119,7 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        _readyToMate = transform.localScale.z > 2f && !NeedsToFlee() && !BadlyNeedsToEat();
+        _readyToMate = transform.localScale.z > 1.15f && !NeedsToFlee() && !BadlyNeedsToEat();
         return _readyToMate;
     }
 
@@ -135,15 +132,6 @@ public class Rabbit : Animal
     public float DistanceTo(Vector3 target)
     {
         return Vector3.Distance(transform.position, target);
-    }
-
-    public void GoToTarget()
-    {
-        if (!HasNoGoodTarget())
-        {
-            _currentTargetPosition = _currentTarget.transform.position;
-            _agent.SetDestination(_currentTargetPosition);
-        }
     }
 
     public void GoAwayFromTarget()

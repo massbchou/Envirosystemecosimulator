@@ -19,6 +19,7 @@ public abstract class Animal : MonoBehaviour
     public Vector3 _currentTargetPosition;
 
     public bool _readyToMate;
+    public bool isMating = false; //variable that is true through the duration of the mate coroutine
 
     //getters and setters
     public string TargetTag { get { return _targetTag; } set { _targetTag = value; } }
@@ -33,6 +34,7 @@ public abstract class Animal : MonoBehaviour
         _currentTarget = null;
 
         _readyToMate = false;
+        isMating = false;
     }
 
     public GameObject FindTarget(string desiredTag) //was protected
@@ -74,6 +76,15 @@ public abstract class Animal : MonoBehaviour
         return _currentTarget == null; /* ||
             (_ground._corner1.x >= _currentTargetPosition.x) || (_ground._corner2.x <= _currentTargetPosition.x) ||
             (_ground._corner4.z >= _currentTargetPosition.z) || (_ground._corner1.z <= _currentTargetPosition.z);*/
+    }
+
+    public void GoToTarget()
+    {
+        if (!HasNoGoodTarget())
+        {
+            _currentTargetPosition = _currentTarget.transform.position;
+            _agent.SetDestination(_currentTargetPosition);
+        }
     }
 
 

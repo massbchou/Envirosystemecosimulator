@@ -13,20 +13,24 @@ public class Fox : Animal
     public FoxMatingState Mating = new FoxMatingState();
 
     GameObject ground;
-    bool wandering = false;
+    //bool wandering = false;
     private float belly;
     [SerializeField] public float _eatingDistance = 3f;
     [SerializeField] float _maxBelly = 20f;
+
+    [SerializeField] GameObject _foxPrefab; //baby to spawn
+
+    [SerializeField] float _matingTime = 1f; //time it takes to mate
 
     // Start is called before the first frame update
     void Start()
     {
         _targetTag = "Rabbit";
-        wandering = false;
+        //wandering = false;
         base.Start();
         _agent.enabled = true;
         belly = _maxBelly;
-        ground = GameObject.Find("Ground");
+        //ground = GameObject.Find("Ground");
 
         //initialize to idle state
         currentState = Idle;
@@ -96,9 +100,45 @@ public class Fox : Animal
 
     private void wander()
     {
-        wandering = true;
+        //wandering = true;
         _currentTargetPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f) * _senseRadius, transform.position.y, transform.position.z + Random.Range(-1f, 1f) * _senseRadius);
         _agent.SetDestination(_currentTargetPosition);
+    }
+
+    public IEnumerator Mate(Fox other)
+    {
+        Debug.Log("Foxes mating");
+        isMating = true;
+        other.isMating = true;
+
+        _agent.enabled = false;
+        other._agent.enabled = false;
+
+        _animator.SetBool("isMating", true);
+        other._animator.SetBool("isMating", true);
+
+        yield return new WaitForSeconds(_matingTime);
+
+        belly /= 2;
+        other.belly /= 2;
+
+        for (int i = 0; i < Random.Range(1, 3); ++i)
+        {
+            GameObject newRabbit = Instantiate(_foxPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
+            newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        isMating = false;
+        other.isMating = false;
+
+        //_currentTarget = null;
+
+        _animator.SetBool("isMating", false);
+        other._animator.SetBool("isMating", false);
+
+        _agent.enabled = true;
+        other._agent.enabled = true;
+
     }
 
     public void eatRabbit(GameObject rabbit)
@@ -106,17 +146,17 @@ public class Fox : Animal
         //kill rabbit and increase hunger
         Destroy(rabbit);
 
-        belly += 10f;
+        belly += 20f;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 11%, but not over double
-        transform.localScale = new Vector3(Mathf.Max(transform.localScale.x * 1.11f, 1), Mathf.Max(transform.localScale.y * 1.11f, 1), Mathf.Max(transform.localScale.z * 1.11f, 2));
+        transform.localScale = new Vector3(Mathf.Min(transform.localScale.x * 1.05f, 2), Mathf.Min(transform.localScale.y * 1.05f, 2), Mathf.Min(transform.localScale.z * 1.05f, 2));
         if (transform.localScale.z > 2)
         {
             transform.localScale = new Vector3(1f, 1f, 2f);
         }
         _currentTarget = null;
-        wandering = false;
+        //wandering = false;
     }
 
     public bool NeedsToEat()
@@ -151,14 +191,5 @@ public class Fox : Animal
     public float DistanceTo(Vector3 target)
     {
         return Vector3.Distance(transform.position, target);
-    }
-
-    public void GoToTarget()
-    {
-        if (!HasNoGoodTarget())
-        {
-            _currentTargetPosition = _currentTarget.transform.position;
-            _agent.SetDestination(_currentTargetPosition);
-        }
     }
 }

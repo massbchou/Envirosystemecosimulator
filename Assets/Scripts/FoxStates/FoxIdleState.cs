@@ -20,7 +20,7 @@ public class FoxIdleState : FoxAbstractState
             animal.SwitchState(animal.Chasing);
             return;
         }
-        else if (animal.WantsToMate() && animal.SeesMate() && false) //delete && false when implemented
+        else if (animal.WantsToMate() && animal.SeesMate())
         {
             animal.SwitchState(animal.Mating);
             return;

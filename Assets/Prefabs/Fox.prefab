@@ -77,9 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85aa1a43dd8b4674897560b09831b2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _senseRadius: 10
+  _agent: {fileID: 0}
+  _senseRadius: 15
+  _targetTag: 
+  _ground: {fileID: 0}
+  _currentTarget: {fileID: 0}
+  _currentTargetPosition: {x: 0, y: 0, z: 0}
+  _readyToMate: 0
   _eatingDistance: 3
-  _maxBelly: 10
+  _maxBelly: 40
 --- !u!195 &4440843877694752816
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -90,7 +96,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

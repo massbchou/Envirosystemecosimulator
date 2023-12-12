@@ -36,7 +36,7 @@ public class RabbitForagingState : RabbitAbstractState
         if (!animal.HasNoGoodTarget() && animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance)
         {
             //Grow in size by 11%, but not over double
-            animal.transform.localScale = new Vector3(Mathf.Max(animal.transform.localScale.x * 1.11f, 1), Mathf.Max(animal.transform.localScale.y * 1.11f, 1), Mathf.Max(animal.transform.localScale.z * 1.11f, 2));
+            animal.transform.localScale = new Vector3(Mathf.Min(animal.transform.localScale.x * 1.05f, 2), Mathf.Min(animal.transform.localScale.y * 1.05f, 2), Mathf.Min(animal.transform.localScale.z * 1.05f, 2));
 
             //feed 
             animal.belly = animal._maxBelly;
