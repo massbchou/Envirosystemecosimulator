@@ -17,15 +17,18 @@ public class RabbitMatingState : RabbitAbstractState
         {
             animal._readyToMate = false;
             animal.SwitchState(animal.Fleeing);
+            return;
         }
         else if (animal.NeedsToEat())
         {
             animal._readyToMate = false;
             animal.SwitchState(animal.Foraging);
+            return;
         }
         else if (!animal.WantsToMate() || !animal.SeesMate())
         {
             animal.SwitchState(animal.Idle);
+            return;
         }
         else if (animal.HasNoGoodTarget())
         {
@@ -35,7 +38,7 @@ public class RabbitMatingState : RabbitAbstractState
         //mate if able
         if (!animal.HasNoGoodTarget() && animal.DistanceTo(animal._currentTarget.transform.position) < animal._eatingDistance)
         {
-            //Get the other rabbit and check if it is also searching for a this rabbit
+            //Get the other rabbit and check if it is also searching for a rabbit
             Rabbit other = animal._currentTarget.GetComponent<Rabbit>();
             if (other != null && other._readyToMate && !other.isMating && !animal.isMating)
             {

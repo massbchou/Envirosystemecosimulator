@@ -16,6 +16,7 @@ public class RabbitFleeingState : RabbitAbstractState
         if (!animal.NeedsToFlee())
         {
             animal.SwitchState(animal.Idle);
+            return;
         }
         else
         {

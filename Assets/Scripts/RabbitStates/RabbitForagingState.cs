@@ -16,10 +16,12 @@ public class RabbitForagingState : RabbitAbstractState
         if (animal.NeedsToFlee())
         {
             animal.SwitchState(animal.Fleeing);
+            return;
         }
         else if (!animal.NeedsToEat() || !animal.SeesFood())
         {
             animal.SwitchState(animal.Idle);
+            return;
         }
         else if (animal.HasNoGoodTarget())
         {
@@ -35,7 +37,10 @@ public class RabbitForagingState : RabbitAbstractState
 
             //feed 
             animal.belly = animal._maxBelly;
-            if (animal._currentTarget != null) Animal.Destroy(animal._currentTarget.transform.parent.gameObject);
+            if (animal._currentTarget != null)
+            {
+                Animal.Destroy(animal._currentTarget.transform.parent.gameObject);
+            }
         }
 
         //go to target

@@ -51,7 +51,7 @@ public class Rabbit : Animal
         if (belly < 0)
         {
             Destroy(gameObject);
-        }    
+        }
     }
 
     public void SwitchState(RabbitAbstractState state)
@@ -63,7 +63,7 @@ public class Rabbit : Animal
     //Spawn 0-3 new rabbits
     public IEnumerator Mate(Rabbit other)
     {
-        Debug.Log("rabbits mating");
+        Debug.Log("Rabbits mating");
         isMating = true;
         other.isMating = true;
 
@@ -87,9 +87,7 @@ public class Rabbit : Animal
         isMating = false;
         other.isMating = false;
 
-
-        //wandering = false;
-        _currentTarget = null;
+        //_currentTarget = null;
 
         _animator.SetBool("isMating", false);
         other._animator.SetBool("isMating", false);
