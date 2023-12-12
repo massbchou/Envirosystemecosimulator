@@ -42,9 +42,11 @@ public class GrowPlants : MonoBehaviour
     
     void GrowNewPlant()
     {
-        
-        //Instantiate a new plant with scale 0.1, at a random position on the ground
-        Instantiate(plantPrefab, new Vector3(Random.Range(groundXMin, groundXMax), 0.5f, Random.Range(groundZMin, groundZMax)), Quaternion.identity);
+        float randX = Random.Range(groundXMin, groundXMax);
+        float randZ = Random.Range(groundZMin, groundZMax);
+        float terrainY = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
+        //Instantiate a new plant with scale 0.1, at a random position on the ground and a random rotation
+        Instantiate(plantPrefab, new Vector3(randX, terrainY, randZ), Quaternion.Euler(0, Random.Range(0, 360), 0));
         
     }
 }
