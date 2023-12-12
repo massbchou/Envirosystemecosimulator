@@ -42,6 +42,13 @@ public class grow : MonoBehaviour
             Destroy(gameObject);
         }
         
+        //change orientation of the plant based on the terrain
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        {
+            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+        }
+        
     }
     
     //if colliding with the ground push the plant up
