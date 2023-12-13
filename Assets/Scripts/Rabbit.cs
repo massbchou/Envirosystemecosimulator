@@ -30,6 +30,21 @@ public class Rabbit : Animal
         base.Start();
         belly = _maxBelly / 2;
         _agent.enabled = true;
+        
+        bool isbrown = Random.Range(0, 5) == 0;
+        if (isbrown)
+        {
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(0.5f, 0.25f, 0f);
+            //vary shading by up to 10%
+            float variance = Random.Range(-0.1f, 0.1f);
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color *= 1 - variance;
+        }
+        else
+        {
+            //set to a random shade of gray
+            float gray = Random.Range(0f, 1f);
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(gray, gray, gray);
+        }
 
         //initialize to idle state
         currentState = Idle;

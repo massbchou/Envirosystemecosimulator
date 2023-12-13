@@ -168,7 +168,7 @@ public class Fox : Animal
         belly += _maxBelly / 4;
         if (belly > _maxBelly) belly = _maxBelly;
 
-        //grow in size by 11%, but not over double
+        //grow in size by 5%, but not over double
         transform.localScale = new Vector3(Mathf.Min(transform.localScale.x * 1.05f, 2), Mathf.Min(transform.localScale.y * 1.05f, 2), Mathf.Min(transform.localScale.z * 1.05f, 2));
         if (transform.localScale.z > 2)
         {
