@@ -22,12 +22,17 @@ public class WorldManager : MonoBehaviour
     ItemPlacer itemPlacer;
     DialogueManager dialogueManager;
 
+    int numRabbits;
+    int numPlants;
+    int numFoxes;
+
     // Start is called before the first frame update
     void Start()
     {
         timePassed = 0f;
         itemPlacer = FindObjectOfType<ItemPlacer>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        StartCoroutine(CountItemsInScene());
     }
 
     // Update is called once per frame
@@ -64,6 +69,21 @@ public class WorldManager : MonoBehaviour
             playedFact2 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact2);
             itemPlacer.EnableFoxButton();
+        }
+    }
+
+    IEnumerator CountItemsInScene()
+    {
+        float waitTime = 0.25f;
+        while (true)
+        {
+            GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
+            numRabbits = rabbits.Length;
+            GameObject[] plants = GameObject.FindGameObjectsWithTag("Plant");
+            numPlants = plants.Length;
+            GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
+            numFoxes = foxes.Length;
+            yield return new WaitForSeconds(waitTime);
         }
     }
 

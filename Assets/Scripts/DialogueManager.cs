@@ -9,10 +9,13 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
 
+    public AudioSource audioSource;
     [SerializeField] Animator animator;
 
     public Queue<string> sentences; 
 
+    public Queue<AudioClip> audioClips;
+    private AudioClip audioClip;
     public bool IsInDialogue()
     {
         return animator.GetBool("isOpen");
@@ -22,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+        audioClips = new Queue<AudioClip>();
+        audioClip = null;
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -34,6 +39,10 @@ public class DialogueManager : MonoBehaviour
         foreach(string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
+        }
+        foreach(AudioClip audioClip in dialogue.audioClips)
+        {
+            audioClips.Enqueue(audioClip);
         }
 
         DisplayNextSentence();
@@ -48,8 +57,18 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
+        if (audioClips.Count == 0)
+            audioClip = null;
+        else
+            audioClip = audioClips.Dequeue();
+        
+        if (audioClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
+        
     }
 
     IEnumerator TypeSentence(string sentence)
