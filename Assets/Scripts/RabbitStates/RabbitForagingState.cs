@@ -40,7 +40,7 @@ public class RabbitForagingState : RabbitAbstractState
             animal.transform.localScale = new Vector3(Mathf.Min(animal.transform.localScale.x * 1.1f, 2), Mathf.Min(animal.transform.localScale.y * 1.1f, 2), Mathf.Min(animal.transform.localScale.z * 1.1f, 2));
 
             //feed 
-            animal.belly = animal._maxBelly;
+            animal.belly += animal._maxBelly / 2;
             if (animal._currentTarget != null)
             {
                 Animal.Destroy(animal._currentTarget.transform.parent.gameObject);

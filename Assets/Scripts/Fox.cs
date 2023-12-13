@@ -22,6 +22,8 @@ public class Fox : Animal
 
     [SerializeField] float _matingTime = 1f; //time it takes to mate
 
+    public GameObject CurrentTarget { get { return _currentTarget; } set { _currentTarget = value; } } //getter and setter for current target 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,7 @@ public class Fox : Animal
         //wandering = false;
         base.Start();
         _agent.enabled = true;
-        belly = _maxBelly;
+        belly = _maxBelly / 2;
         //ground = GameObject.Find("Ground");
 
         //initialize to idle state
@@ -146,7 +148,7 @@ public class Fox : Animal
         //kill rabbit and increase hunger
         Destroy(rabbit);
 
-        belly += 20f;
+        belly += _maxBelly / 2;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 11%, but not over double
@@ -178,7 +180,7 @@ public class Fox : Animal
 
     public bool WantsToMate()
     {
-        _readyToMate = transform.localScale.z > 1.1f && !BadlyNeedsToEat();
+        _readyToMate = transform.localScale.z >= 1.05f && !BadlyNeedsToEat();
         return _readyToMate;
     }
 

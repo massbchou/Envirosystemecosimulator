@@ -69,12 +69,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87c9681a49a1ba40ba41fd9c312c37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 0}
   _senseRadius: 12
+  _targetTag: 
+  _ground: {fileID: 0}
+  _currentTarget: {fileID: 0}
+  _currentTargetPosition: {x: 0, y: 0, z: 0}
+  _readyToMate: 0
+  isMating: 0
   _eatingDistance: 3
-  _maxBelly: 30
+  _maxBelly: 40
+  belly: 0
   _rabbitPrefab: {fileID: 3979611918914344191}
   _matingTime: 2
-  isMating: 0
 --- !u!65 &5891553247218232108
 BoxCollider:
   m_ObjectHideFlags: 0

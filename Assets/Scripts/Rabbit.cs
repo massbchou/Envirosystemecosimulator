@@ -21,7 +21,7 @@ public class Rabbit : Animal
 
     [SerializeField] float _matingTime = 1f; //time it takes to mate
 
-    public GameObject CurrentTarget{ get { return _currentTarget; } set { _currentTarget = value; }} //getter and setter for current target 
+    public GameObject CurrentTarget { get { return _currentTarget; } set { _currentTarget = value; } } //getter and setter for current target 
 
     // Start is called before the first frame update
     void Start()
@@ -112,7 +112,7 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        _readyToMate = transform.localScale.z > 1.1f && !NeedsToFlee() && !BadlyNeedsToEat();
+        _readyToMate = transform.localScale.z >= 1.05f && !NeedsToFlee() && !BadlyNeedsToEat();
         return _readyToMate;
     }
 

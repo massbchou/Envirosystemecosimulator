@@ -88,7 +88,7 @@ MonoBehaviour:
   isMating: 0
   _eatingDistance: 3
   _maxBelly: 40
-  _foxPrefab: {fileID: 0}
+  _foxPrefab: {fileID: 8747189057095279578}
   _matingTime: 1
 --- !u!195 &4440843877694752816
 NavMeshAgent:
