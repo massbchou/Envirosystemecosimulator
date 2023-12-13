@@ -596,6 +596,10 @@ PrefabInstance:
       propertyPath: groundPlane
       value: 
       objectReference: {fileID: 940340498}
+    - target: {fileID: 3559338248112133289, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: plantPrefab
+      value: 
+      objectReference: {fileID: 5741296175201950998, guid: 1160d51682fbaeb48af1b42b58074a38, type: 3}
     - target: {fileID: 4833014886520070916, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.385012
