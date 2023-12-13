@@ -5,9 +5,13 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     [SerializeField] private int _gridGranularity = 2; //x by x grid
-    
-    
-    
+
+    //spawning range
+    public float groundXMin; //left
+    public float groundXMax; //right
+    public float groundZMin; //bottom
+    public float groundZMax; //top
+
     //variables that should be accessible from other scripts
     internal Vector3 _corner1; //northwest corner
     internal Vector3 _corner2; //northeast corner
@@ -71,6 +75,15 @@ public class Ground : MonoBehaviour
                 _groundTiles[x, z] = tile;
             }
         }
+
+
+        groundXMin = _corner1.x;
+        groundXMax = _corner2.x;
+        groundZMax = _corner4.z;
+        groundZMin = _corner1.z;
+
+       // Debug.LogWarning(groundXMin + " " + groundXMax + " " + groundZMin + " " + groundZMax);
+
     }
 
     // Update is called once per frame

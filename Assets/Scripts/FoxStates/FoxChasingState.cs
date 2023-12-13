@@ -8,7 +8,6 @@ public class FoxChasingState : FoxAbstractState
 
     public override void EnterState(Fox animal)
     {
-        Debug.Log("Fox entered chasing state");
         animal._currentTarget = animal.FindFoxFood();
     }
 

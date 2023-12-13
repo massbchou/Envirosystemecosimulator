@@ -70,7 +70,7 @@ public class Rabbit : Animal
 
         yield return new WaitForSeconds(_matingTime);
 
-        belly /= 2;
+        belly = belly / 2 - 1;
 
         for (int i = 0; i < Random.Range(1, 3); ++i)
         {
@@ -112,7 +112,7 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        _readyToMate = transform.localScale.z >= 1.05f && !NeedsToFlee() && !BadlyNeedsToEat();
+        _readyToMate = transform.localScale.z >= 1.05f && !NeedsToFlee() && !NeedsToEat();
         return _readyToMate;
     }
 
@@ -129,12 +129,12 @@ public class Rabbit : Animal
 
     public void GoAwayFromTarget()
     {
-        if (!HasNoGoodTarget())
-        {
-            _currentTargetPosition = _currentTarget.transform.position;
-            Vector3 directionToFox = _currentTargetPosition - transform.position;
-            Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
-            _agent.SetDestination(transform.position + directionAwayFromFox);
-        }
+        if (HasNoGoodTarget()) { return; }
+        
+        _currentTargetPosition = _currentTarget.transform.position;
+        Vector3 directionToFox = _currentTargetPosition - transform.position;
+        Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
+        _agent.SetDestination(transform.position + directionAwayFromFox);
+        
     }
 }

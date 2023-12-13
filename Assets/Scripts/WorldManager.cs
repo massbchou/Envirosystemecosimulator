@@ -1,23 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WorldManager : MonoBehaviour
 {
     //This class is for managing the state of the world and the player's progress in it
 
-    [SerializeField] Dialogue introDialogue;
-    bool playedIntro = false;
+    [SerializeField] Dialogue funFact0;
+    bool playedFact0 = false;
 
-    float timePassed = 0f;
+    float timePassedSinceLastDialogue = 0f;
     bool counting = false;
 
     [SerializeField] Dialogue funFact1;
     bool playedFact1 = false;
 
+    [SerializeField] Dialogue movementTutorial;
+    bool playedMovementTutorial = false;
+
     [SerializeField] Dialogue funFact2;
     bool playedFact2 = false;
 
+    [SerializeField] Dialogue funFact3;
+    bool playedFact3 = false;
 
     ItemPlacer itemPlacer;
     DialogueManager dialogueManager;
@@ -26,13 +33,35 @@ public class WorldManager : MonoBehaviour
     int numPlants;
     int numFoxes;
 
+    [SerializeField] Button continueButton;
+
+    [SerializeField] Text plantCounter;
+    [SerializeField] Text rabbitCounter;
+    [SerializeField] Text foxCounter;
+
+    GrowPlants plantGrower;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        timePassed = 0f;
+        timePassedSinceLastDialogue = 0f;
+
         itemPlacer = FindObjectOfType<ItemPlacer>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        plantGrower = FindObjectOfType<GrowPlants>();
+
+        plantGrower.shouldGrowPlants = false;
+
+        continueButton.onClick.AddListener(GoToNextLevel);
+        continueButton.gameObject.SetActive(false);
+
         StartCoroutine(CountItemsInScene());
+
+        plantCounter.text = "Plants: 0";
+        rabbitCounter.text = "Rabbits: 0";
+        foxCounter.text = "Foxes: 0";
+
     }
 
     // Update is called once per frame
@@ -40,6 +69,7 @@ public class WorldManager : MonoBehaviour
     {
         if (!dialogueManager.IsInDialogue() && !counting)
         {
+            timePassedSinceLastDialogue = 0f;
             counting = true;
             StartCoroutine(CountTimeNotInDialogue());
         }
@@ -49,40 +79,73 @@ public class WorldManager : MonoBehaviour
             StopCoroutine(CountTimeNotInDialogue());
         }
 
-        if (!playedIntro)
+        if (!playedFact0)
         {
-            playedIntro = true;
-            dialogueManager.StartDialogue(introDialogue);
+            playedFact0 = true;
+            dialogueManager.StartDialogue(funFact0);
             itemPlacer.EnablePlantButton();
+            timePassedSinceLastDialogue = 0f;
         }
 
 
-        if(timePassed > 10 && !playedFact1)
+        if (timePassedSinceLastDialogue > 20 && !playedFact1)
         {
             playedFact1 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
             itemPlacer.EnableRabbitButton();
+            timePassedSinceLastDialogue = 0f;
         }
 
-        if (timePassed > 20 && !playedFact2)
+        if (timePassedSinceLastDialogue > 20 && !playedMovementTutorial)
+        {
+            playedMovementTutorial = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(movementTutorial);
+            timePassedSinceLastDialogue = 0f;
+        }
+
+        if (timePassedSinceLastDialogue > 20 && !playedFact2)
         {
             playedFact2 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact2);
             itemPlacer.EnableFoxButton();
+            timePassedSinceLastDialogue = 0f;
+        }
+
+        if (timePassedSinceLastDialogue > 30 && !playedFact3)
+        {
+            playedFact3 = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(funFact3);
+            continueButton.gameObject.SetActive(true);
+            timePassedSinceLastDialogue = 0f;
         }
     }
 
     IEnumerator CountItemsInScene()
     {
-        float waitTime = 0.25f;
+        float waitTime = 0.20f;
         while (true)
         {
             GameObject[] rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
             numRabbits = rabbits.Length;
+            rabbitCounter.text = "Rabbits: " + numRabbits.ToString();
+
             GameObject[] plants = GameObject.FindGameObjectsWithTag("Plant");
             numPlants = plants.Length;
+            plantCounter.text = "Plants: " + numPlants.ToString();
+
+            if(numPlants >= 2)
+            {
+                plantGrower.shouldGrowPlants = true;
+            }
+            else
+            {
+                plantGrower.shouldGrowPlants = false;
+            }
+
             GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
             numFoxes = foxes.Length;
+            foxCounter.text = "Foxes: " + numFoxes.ToString();
+
             yield return new WaitForSeconds(waitTime);
         }
     }
@@ -93,8 +156,13 @@ public class WorldManager : MonoBehaviour
         while (counting)
         {
             yield return new WaitForSeconds(waitTime);
-            timePassed += waitTime;
+            timePassedSinceLastDialogue += waitTime;
         }
-        
     }
+
+    void GoToNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }

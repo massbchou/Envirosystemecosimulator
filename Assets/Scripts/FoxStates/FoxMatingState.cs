@@ -6,7 +6,6 @@ public class FoxMatingState : FoxAbstractState
 {
     public override void EnterState(Fox animal)
     {
-        Debug.Log("Fox entered mating state");
         animal._currentTarget = animal.FindTarget("Fox");
     }
 

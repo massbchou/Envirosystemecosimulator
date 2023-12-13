@@ -6,7 +6,6 @@ public class RabbitMatingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        Debug.Log("Rabbit entered mating state");
         animal._currentTarget = animal.FindTarget("Rabbit");
     }
 

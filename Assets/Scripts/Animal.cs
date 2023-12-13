@@ -24,12 +24,15 @@ public abstract class Animal : MonoBehaviour
     //getters and setters
     public string TargetTag { get { return _targetTag; } set { _targetTag = value; } }
 
+
     // Start is called before the first frame update
     protected void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        _agent = GetComponent<NavMeshAgent>();  
-        //_ground = GameObject.Find("Ground").GetComponent<Ground>();
+        _agent = GetComponent<NavMeshAgent>();
+
+
+        _ground = FindObjectOfType<Ground>();
         _currentTarget = null;
 
         _readyToMate = false;
@@ -98,5 +101,25 @@ public abstract class Animal : MonoBehaviour
         {
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         }
+    }
+    public void ClampTargetPositionToTerrain()
+    {
+        if (HasNoGoodTarget()) { return; }
+        _currentTargetPosition.x = Mathf.Clamp(_currentTargetPosition.x, _ground.groundXMin, _ground.groundXMax);
+        _currentTargetPosition.z = Mathf.Clamp(_currentTargetPosition.z, _ground.groundZMin, _ground.groundZMax);
+        _currentTargetPosition.y = Terrain.activeTerrain.SampleHeight(_currentTargetPosition);
+
+    }
+
+    public void GetRandomTarget()
+    {
+        _currentTarget = gameObject; //when the target isn't another game object, set it to the animal itself to fix HasNoGoodTargets()
+
+        _currentTargetPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f) * _senseRadius, transform.position.y, transform.position.z + Random.Range(-1f, 1f) * _senseRadius);
+
+        //Make sure x, y, and z are all within terrain
+        ClampTargetPositionToTerrain();
+        _agent.SetDestination(_currentTargetPosition);
+
     }
 }
