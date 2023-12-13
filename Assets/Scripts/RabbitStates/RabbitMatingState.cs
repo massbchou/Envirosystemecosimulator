@@ -12,6 +12,11 @@ public class RabbitMatingState : RabbitAbstractState
 
     public override void UpdateState(Rabbit animal)
     {
+        if (animal.isMating)
+        {
+            return;
+        }
+
         //if rabbit has mated, or urgent need to eat or flee, change state
         if (animal.NeedsToFlee())
         {
@@ -40,9 +45,10 @@ public class RabbitMatingState : RabbitAbstractState
         {
             //Get the other rabbit and check if it is also searching for a rabbit
             Rabbit other = animal._currentTarget.GetComponent<Rabbit>();
-            if (other != null && other._readyToMate && !other.isMating && !animal.isMating)
+            if (other != null && GameObject.ReferenceEquals(other.CurrentTarget.gameObject, animal.gameObject) && other._readyToMate && !animal.isMating)
             {
                 animal.StartCoroutine(animal.Mate(other));
+                return;
             }
         }
 

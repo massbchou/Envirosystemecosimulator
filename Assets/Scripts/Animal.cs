@@ -39,6 +39,7 @@ public abstract class Animal : MonoBehaviour
 
     public GameObject FindTarget(string desiredTag) //was protected
     {
+
         if (string.IsNullOrEmpty(this.tag) || string.IsNullOrEmpty(desiredTag)) return null;
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _senseRadius);

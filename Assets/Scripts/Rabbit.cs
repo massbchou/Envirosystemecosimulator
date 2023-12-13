@@ -28,7 +28,7 @@ public class Rabbit : Animal
     {
         _targetTag = "Plant";
         base.Start();
-        belly = _maxBelly;
+        belly = _maxBelly / 2;
         _agent.enabled = true;
 
         //initialize to idle state
@@ -39,9 +39,6 @@ public class Rabbit : Animal
     // Update is called once per frame
     void Update()
     {
-        //call current state's update function each update
-        currentState.UpdateState(this);
-
         //decrease belly by time
         belly -= Time.deltaTime;
 
@@ -49,6 +46,9 @@ public class Rabbit : Animal
         {
             Destroy(gameObject);
         }
+
+        //call current state's update function each update
+        currentState.UpdateState(this);
     }
 
     public void SwitchState(RabbitAbstractState state)
@@ -62,18 +62,15 @@ public class Rabbit : Animal
     {
         Debug.Log("Rabbits mating");
         isMating = true;
-        other.isMating = true;
+
 
         _agent.enabled = false;
-        other._agent.enabled = false;
 
         _animator.SetBool("isMating", true);
-        other._animator.SetBool("isMating", true);
 
         yield return new WaitForSeconds(_matingTime);
 
         belly /= 2;
-        other.belly /= 2;
 
         for (int i = 0; i < Random.Range(1, 3); ++i)
         {
@@ -82,15 +79,11 @@ public class Rabbit : Animal
         }
 
         isMating = false;
-        other.isMating = false;
-
-        //_currentTarget = null;
+        _readyToMate = false;
 
         _animator.SetBool("isMating", false);
-        other._animator.SetBool("isMating", false);
 
         _agent.enabled = true;
-        other._agent.enabled = true;
 
     }
 
