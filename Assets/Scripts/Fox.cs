@@ -178,7 +178,7 @@ public class Fox : Animal
 
     public bool WantsToMate()
     {
-        _readyToMate = transform.localScale.z > 2f && !BadlyNeedsToEat();
+        _readyToMate = transform.localScale.z > 1.1f && !BadlyNeedsToEat();
         return _readyToMate;
     }
 

@@ -112,7 +112,7 @@ public class Rabbit : Animal
 
     public bool WantsToMate()
     {
-        _readyToMate = transform.localScale.z > 1.15f && !NeedsToFlee() && !BadlyNeedsToEat();
+        _readyToMate = transform.localScale.z > 1.1f && !NeedsToFlee() && !BadlyNeedsToEat();
         return _readyToMate;
     }
 
