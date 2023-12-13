@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Rabbit : Animal
 {
-    GameObject _currentTarget = null;
-    Vector3 _currentTargetPosition;
-    [SerializeField] float _eatingDistance = 2f;
-    [SerializeField] float _maxBelly = 10f;
-    private float belly;
-    bool wandering = false;
-    private bool isBrown = false;
+    //stores state of rabbit
+    RabbitAbstractState currentState;
+
+    //all states a rabbit can be in
+    public RabbitIdleState Idle = new RabbitIdleState();
+    public RabbitMatingState Mating = new RabbitMatingState();
+    public RabbitFleeingState Fleeing = new RabbitFleeingState();
+    public RabbitForagingState Foraging = new RabbitForagingState();
+
+    [SerializeField] public float _eatingDistance = 2f;
+    [SerializeField] public float _maxBelly = 10f;
+    public float belly; //was private
 
     [SerializeField] GameObject _rabbitPrefab; //baby to spawn
 
     [SerializeField] float _matingTime = 1f; //time it takes to mate
-
-    public bool isMating = false; //variable that is true through the duration of the mate coroutine
 
     public GameObject CurrentTarget{ get { return _currentTarget; } set { _currentTarget = value; }} //getter and setter for current target 
 
@@ -24,29 +27,13 @@ public class Rabbit : Animal
     void Start()
     {
         _targetTag = "Plant";
-        wandering = false;
-        _currentTarget = null;
-        isMating = false;
         base.Start();
-        belly = _maxBelly;
+        belly = _maxBelly / 2;
         _agent.enabled = true;
-        //randomly pick brown or white using a ternary operator
-        isBrown = Random.Range(0, 4) == 0 ? true : false;
-        if (isBrown)
-        {
-            //set color to a brown
-            GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(0.5f, 0.25f, 0f);
-            //vary each value by up to 0.1
-            GetComponentInChildren<SkinnedMeshRenderer>().material.color += new Color(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f));
-        }
-        else
-        {
-            //set color to a random shade of white to black
-            float color = Random.Range(0f, 1f);
-            GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(color, color, color);
-        }
-        
-        
+
+        //initialize to idle state
+        currentState = Idle;
+        currentState.EnterState(this);
     }
 
     // Update is called once per frame
@@ -60,83 +47,30 @@ public class Rabbit : Animal
             Destroy(gameObject);
         }
 
-        //if scale reaches 2 and not very hungry, start searching for mate. Else search for food
-        if (transform.localScale.z > 2f && belly > _maxBelly / 2)
-        {
-            _targetTag = "Rabbit";
-        }
-        else
-        {
-            _targetTag = "Plant";
-        }
+        //call current state's update function each update
+        currentState.UpdateState(this);
+    }
 
-        //Don't update target or anything esle if you are mating
-        if (isMating) return;
-
-        //look for target if you don't have one, or if your target is moving
-        if(_currentTarget == null || this.CompareTag(_targetTag))
-        {
-            _currentTarget = FindTarget(_targetTag);
-            if(_currentTarget != null)
-            {
-                wandering = false;
-                _currentTargetPosition = _currentTarget.transform.position;
-                _agent.SetDestination(_currentTargetPosition);
-            }
-        }
-
-        //no target found, so find a random position
-        if (_currentTarget == null && !wandering)
-        {
-
-            wandering = true;
-            _currentTargetPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f) * _senseRadius, transform.position.y, transform.position.z + Random.Range(-1f, 1f) * _senseRadius);
-            _agent.SetDestination(_currentTargetPosition);
-        }
-
-
-        float dist = (transform.position - _currentTargetPosition).magnitude;
-        if (dist < _eatingDistance)
-        {
-            //if searching for plant
-            if (_currentTarget != null && _currentTarget.CompareTag("Plant"))
-            {
-                //Grow in size by 5%, but not over double
-                transform.localScale = new Vector3(Mathf.Min(transform.localScale.x * 1.05f, 2), Mathf.Min(transform.localScale.y * 1.05f, 2), Mathf.Min(transform.localScale.z * 1.05f, 2));
-                
-                //feed 
-                belly = _maxBelly;
-                if (_currentTarget != null) Destroy(_currentTarget.transform.parent.gameObject);
-            }
-            //if searching for mate
-            else if(_currentTarget != null && _currentTarget.CompareTag("Rabbit")){
- 
-                //Get the other rabbit and check if it is also searching for a this rabbit
-                Rabbit other = _currentTarget.GetComponent<Rabbit>();
-                if(GameObject.ReferenceEquals(other.CurrentTarget, gameObject))
-                {
-                    StartCoroutine(Mate(other));
-                    return;
-                }
-            }
-
-
-            wandering = false;
-            _currentTarget = null;
-
-        }
-        
+    public void SwitchState(RabbitAbstractState state)
+    {
+        currentState = state;
+        currentState.EnterState(this);
     }
 
     //Spawn 0-3 new rabbits
     public IEnumerator Mate(Rabbit other)
     {
+        Debug.Log("Rabbits mating");
         isMating = true;
 
+
         _agent.enabled = false;
+
         _animator.SetBool("isMating", true);
 
         yield return new WaitForSeconds(_matingTime);
+
+        belly /= 2;
 
         for (int i = 0; i < Random.Range(1, 3); ++i)
         {
@@ -144,15 +78,63 @@ public class Rabbit : Animal
             newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        belly /= 2;
         isMating = false;
-
-
-        wandering = false;
-        _currentTarget = null;
+        _readyToMate = false;
 
         _animator.SetBool("isMating", false);
+
         _agent.enabled = true;
 
+    }
+
+    public bool NeedsToEat()
+    {
+        return belly < _maxBelly / 2;
+    }
+
+
+    public bool BadlyNeedsToEat()
+    {
+        return belly < _maxBelly / 4;
+    }
+
+
+    public bool SeesFood()
+    {
+        return FindTarget("Plant") != null;
+    }
+
+
+    public bool NeedsToFlee()
+    {
+        return FindTarget("Fox");
+    }
+
+    public bool WantsToMate()
+    {
+        _readyToMate = transform.localScale.z > 1.15f && !NeedsToFlee() && !BadlyNeedsToEat();
+        return _readyToMate;
+    }
+
+
+    public bool SeesMate()
+    {
+        return FindTarget("Rabbit") != null;
+    }
+
+    public float DistanceTo(Vector3 target)
+    {
+        return Vector3.Distance(transform.position, target);
+    }
+
+    public void GoAwayFromTarget()
+    {
+        if (!HasNoGoodTarget())
+        {
+            _currentTargetPosition = _currentTarget.transform.position;
+            Vector3 directionToFox = _currentTargetPosition - transform.position;
+            Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
+            _agent.SetDestination(transform.position + directionAwayFromFox);
+        }
     }
 }

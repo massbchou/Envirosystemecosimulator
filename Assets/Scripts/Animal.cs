@@ -6,12 +6,20 @@ using UnityEngine.AI;
 public abstract class Animal : MonoBehaviour
 {
 
-    protected NavMeshAgent _agent;
-    [SerializeField] protected float _senseRadius = 10f;
+    public NavMeshAgent _agent; //was protected
+    [SerializeField] public float _senseRadius = 10f; //was protected
 
-    protected string _targetTag;
+    public string _targetTag; //was protected
 
     protected Animator _animator;
+
+    public Ground _ground;
+
+    public GameObject _currentTarget = null;
+    public Vector3 _currentTargetPosition;
+
+    public bool _readyToMate;
+    public bool isMating = false; //variable that is true through the duration of the mate coroutine
 
     //getters and setters
     public string TargetTag { get { return _targetTag; } set { _targetTag = value; } }
@@ -21,10 +29,17 @@ public abstract class Animal : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _agent = GetComponent<NavMeshAgent>();  
+/*        _ground = GameObject.Find("Ground").GetComponent<Ground>();
+*/
+        _currentTarget = null;
+
+        _readyToMate = false;
+        isMating = false;
     }
 
-    protected GameObject FindTarget(string desiredTag)
+    public GameObject FindTarget(string desiredTag) //was protected
     {
+
         if (string.IsNullOrEmpty(this.tag) || string.IsNullOrEmpty(desiredTag)) return null;
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _senseRadius);
@@ -40,8 +55,8 @@ public abstract class Animal : MonoBehaviour
             if (this.CompareTag(desiredTag))
             {
                 Animal other = collider.GetComponent<Animal>();
-                if (other == null || string.IsNullOrEmpty(other.TargetTag)) continue;
-                if (!this.CompareTag(other.TargetTag)) continue;
+                if (other == null) continue;
+                if (!other._readyToMate) continue;
             }
 
             //get distance to find closest
@@ -55,6 +70,22 @@ public abstract class Animal : MonoBehaviour
 
         if (closest == null) return null;
         return closest.gameObject;
+    }
+
+    public bool HasNoGoodTarget()
+    {
+        return _currentTarget == null; /* ||
+            (_ground._corner1.x >= _currentTargetPosition.x) || (_ground._corner2.x <= _currentTargetPosition.x) ||
+            (_ground._corner4.z >= _currentTargetPosition.z) || (_ground._corner1.z <= _currentTargetPosition.z);*/
+    }
+
+    public void GoToTarget()
+    {
+        if (!HasNoGoodTarget())
+        {
+            _currentTargetPosition = _currentTarget.transform.position;
+            _agent.SetDestination(_currentTargetPosition);
+        }
     }
 
 
