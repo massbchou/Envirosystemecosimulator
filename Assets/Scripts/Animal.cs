@@ -91,6 +91,11 @@ public abstract class Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //change orientation of the plant based on the terrain
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        {
+            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+        }
     }
 }

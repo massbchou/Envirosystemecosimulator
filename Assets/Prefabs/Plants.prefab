@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxScale: 2
-  growRate: 0.001
+  growRate: 1
   maxAgeSeconds: 30
+  sizeVariancePercentage: 0.4
 --- !u!1 &7904311496548371732
 GameObject:
   m_ObjectHideFlags: 0

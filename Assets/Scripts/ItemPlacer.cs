@@ -45,7 +45,7 @@ public class ItemPlacer : MonoBehaviour
     void SelectRabbit()
     {
         _currentSelection = _rabbit;
-        crosshairColor = new Color(0.7f, 0.7f, 0.7f);
+        crosshairColor = new Color(0.3f, 0.3f, 0.3f);
     }
 
     void SelectFox()
