@@ -22,8 +22,8 @@ public class GrowPlants : MonoBehaviour
         Ground ground = groundPlane.GetComponent<Ground>();
         groundXMin = ground._corner1.x;
         groundXMax = ground._corner2.x;
-        groundZMin = ground._corner4.z;
-        groundZMax = ground._corner1.z;
+        groundZMin = ground._corner1.z;
+        groundZMax = ground._corner4.z;
         groundCenter = ground._center;
     }
 
