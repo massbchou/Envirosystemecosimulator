@@ -9,7 +9,7 @@ public class FoxChasingState : FoxAbstractState
     public override void EnterState(Fox animal)
     {
         Debug.Log("Fox entered chasing state");
-        animal._currentTarget = animal.FindTarget("Rabbit");
+        animal._currentTarget = animal.FindFoxFood();
     }
 
     public override void UpdateState(Fox animal)
@@ -22,7 +22,7 @@ public class FoxChasingState : FoxAbstractState
         }
         else if (animal.HasNoGoodTarget())
         {
-            animal._currentTarget = animal.FindTarget("Rabbit");
+            animal._currentTarget = animal.FindFoxFood();
             if (animal._currentTarget == null)
             {
                 animal.SwitchState(animal.Idle);
@@ -30,7 +30,7 @@ public class FoxChasingState : FoxAbstractState
         }
         else //retarget if possible
         {
-            newPossibleTarget = animal.FindTarget("Rabbit");
+            newPossibleTarget = animal.FindFoxFood();
             if (newPossibleTarget != null && animal.DistanceTo(newPossibleTarget.transform.position) < animal.DistanceTo(animal._currentTarget.transform.position))
             {
                 animal._currentTarget = newPossibleTarget;
@@ -40,7 +40,16 @@ public class FoxChasingState : FoxAbstractState
         //eat if able
         if (!animal.HasNoGoodTarget() && animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance)
         {
-            animal.eatRabbit(animal._currentTarget);
+            if (animal._currentTarget.CompareTag("Rabbit"))
+            {
+                animal.eatRabbit(animal._currentTarget);
+            }
+            else if (animal._currentTarget.CompareTag("Plant"))
+            {
+                animal.eatPlant(animal._currentTarget);
+            }
+
+            //add code to act differently if eating a plant instead
         }
 
         //go to target

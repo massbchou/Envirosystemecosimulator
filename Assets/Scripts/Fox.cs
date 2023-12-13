@@ -158,7 +158,23 @@ public class Fox : Animal
             transform.localScale = new Vector3(1f, 1f, 2f);
         }
         _currentTarget = null;
-        //wandering = false;
+    }
+
+    public void eatPlant(GameObject plant)
+    {
+        //kill rabbit and increase hunger
+        Destroy(plant.transform.parent.gameObject);
+
+        belly += _maxBelly / 4;
+        if (belly > _maxBelly) belly = _maxBelly;
+
+        //grow in size by 11%, but not over double
+        transform.localScale = new Vector3(Mathf.Min(transform.localScale.x * 1.05f, 2), Mathf.Min(transform.localScale.y * 1.05f, 2), Mathf.Min(transform.localScale.z * 1.05f, 2));
+        if (transform.localScale.z > 2)
+        {
+            transform.localScale = new Vector3(1f, 1f, 2f);
+        }
+        _currentTarget = null;
     }
 
     public bool NeedsToEat()
@@ -175,7 +191,22 @@ public class Fox : Animal
 
     public bool SeesFood()
     {
-        return FindTarget("Rabbit") != null;
+        return FindTarget("Rabbit") != null || ( BadlyNeedsToEat() && FindTarget("Plant") != null );
+    }
+
+    public GameObject FindFoxFood()
+    {
+        GameObject nearRabbit = FindTarget("Rabbit");
+        GameObject nearPlant = FindTarget("Plant");
+
+        if (BadlyNeedsToEat() && nearPlant != null)
+        {
+            return nearPlant;
+        }
+        else
+        {
+            return nearRabbit;
+        }
     }
 
     public bool WantsToMate()
