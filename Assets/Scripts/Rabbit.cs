@@ -12,6 +12,7 @@ public class Rabbit : Animal
     public RabbitMatingState Mating = new RabbitMatingState();
     public RabbitFleeingState Fleeing = new RabbitFleeingState();
     public RabbitForagingState Foraging = new RabbitForagingState();
+    public RabbitDrinkingState Drinking = new RabbitDrinkingState();
 
     [SerializeField] public float _eatingDistance = 2f;
     [SerializeField] public float _maxBelly = 10f;
@@ -146,6 +147,23 @@ public class Rabbit : Animal
     public bool SeesFood()
     {
         return FindTarget("Plant") != null;
+    }
+
+    public bool NeedsToDrink()
+    {
+        return false; //eqivalent belly < _maxBelly / 2;
+    }
+
+
+    public bool BadlyNeedsToDrink()
+    {
+        return false; // belly < _maxBelly / 4;
+    }
+
+
+    public bool SeesWater()
+    {
+        return FindTarget("Water") != null;
     }
 
 

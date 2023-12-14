@@ -11,6 +11,7 @@ public class Fox : Animal
     public FoxIdleState Idle = new FoxIdleState();
     public FoxChasingState Chasing = new FoxChasingState();
     public FoxMatingState Mating = new FoxMatingState();
+    public FoxDrinkingState Drinking = new foxDrinkingState();
 
     GameObject ground;
     //bool wandering = false;
@@ -51,47 +52,6 @@ public class Fox : Animal
              Destroy(gameObject);
             return;
         }
-
-        //continuously update target (as rabbits are moving)
-        /*
-        _currentTarget = FindTarget(_targetTag);
-        if (_currentTarget != null)
-        {
-            wandering = false;
-            _currentTargetPosition = _currentTarget.transform.position;
-            _agent.SetDestination(_currentTargetPosition);
-        }
-        */
-   
-
-        //no target, wander
-        /*
-        if(_currentTarget == null && !wandering)
-        {
-            wander();
-        }
-        */
-
-        //get distance to target
-        //float distance = (_currentTargetPosition - transform.position).magnitude;
-        //if we are close enough to target, eat or mate
-        /*
-        if (distance < _eatingDistance)
-        {
-            if(_currentTarget == null)
-            {
-                wander();
-            }
-            else
-            {
-                eatRabbit(_currentTarget);
-            }
-        }
-        */
-
-            
-        
-
     }
 
     public void SwitchState(FoxAbstractState state)
@@ -207,6 +167,23 @@ public class Fox : Animal
         {
             return nearRabbit;
         }
+    }
+
+    public bool NeedsToDrink()
+    {
+        return false; //eqivalent belly < _maxBelly / 2;
+    }
+
+
+    public bool BadlyNeedsToDrink()
+    {
+        return false; // belly < _maxBelly / 4;
+    }
+
+
+    public bool SeesWater()
+    {
+        return FindTarget("Water") != null;
     }
 
     public bool WantsToMate()
