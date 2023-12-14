@@ -33,7 +33,8 @@ public class RabbitIdleState : RabbitAbstractState
         }
         else if (animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance || animal.HasNoGoodTarget())
         {
-            animal.GetRandomTarget();        }
+            animal.GetRandomTarget();        
+        }
     }
 
     public override void OnCollisionEnter(Rabbit animal)
