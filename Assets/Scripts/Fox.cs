@@ -162,7 +162,7 @@ public class Fox : Animal
 
     public void eatPlant(GameObject plant)
     {
-        //kill rabbit and increase hunger
+        //destroy plant and increase hunger
         Destroy(plant.transform.parent.gameObject);
 
         belly += _maxBelly / 4;

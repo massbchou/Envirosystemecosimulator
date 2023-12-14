@@ -17,6 +17,9 @@ public class Rabbit : Animal
     [SerializeField] public float _maxBelly = 10f;
     public float belly; //was private
 
+    public bool zigzagReversed = false;
+    public float zigzagTimer = 1.0f;
+
     [SerializeField] GameObject _rabbitPrefab; //baby to spawn
 
     [SerializeField] float _matingTime = 1f; //time it takes to mate
@@ -30,6 +33,9 @@ public class Rabbit : Animal
         base.Start();
         belly = _maxBelly / 2;
         _agent.enabled = true;
+
+        zigzagReversed = false;
+        zigzagTimer = 1.0f;
         
         bool isbrown = Random.Range(0, 5) == 0;
         if (isbrown)
@@ -54,16 +60,22 @@ public class Rabbit : Animal
     // Update is called once per frame
     void Update()
     {
+        //call current state's update function each update
+        currentState.UpdateState(this);
+
         //decrease belly by time
         belly -= Time.deltaTime;
-
         if (belly < 0)
         {
             Destroy(gameObject);
         }
 
-        //call current state's update function each update
-        currentState.UpdateState(this);
+        zigzagTimer -= Time.deltaTime;
+        if (zigzagTimer < 0)
+        {
+            zigzagReversed = !zigzagReversed;
+            zigzagTimer += 1f;
+        }
     }
 
     public void SwitchState(RabbitAbstractState state)
@@ -100,6 +112,23 @@ public class Rabbit : Animal
 
         _agent.enabled = true;
 
+    }
+
+    public void eatPlant(GameObject plant)
+    {
+        //destroy plant and increase hunger
+        Destroy(plant.transform.parent.gameObject);
+
+        belly += _maxBelly / 4;
+        if (belly > _maxBelly) belly = _maxBelly;
+
+        //grow in size by 5%, but not over double
+        transform.localScale = new Vector3(Mathf.Min(transform.localScale.x * 1.05f, 2), Mathf.Min(transform.localScale.y * 1.05f, 2), Mathf.Min(transform.localScale.z * 1.05f, 2));
+        if (transform.localScale.z > 2)
+        {
+            transform.localScale = new Vector3(1f, 1f, 2f);
+        }
+        _currentTarget = null;
     }
 
     public bool NeedsToEat()
@@ -149,7 +178,10 @@ public class Rabbit : Animal
         _currentTargetPosition = _currentTarget.transform.position;
         Vector3 directionToFox = _currentTargetPosition - transform.position;
         Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
-        _agent.SetDestination(transform.position + directionAwayFromFox);
+
+        Vector3 zigzagOffset = zigzagReversed ? Vector3.Cross(directionAwayFromFox, Vector3.up).normalized * -1 : Vector3.Cross(Vector3.up, directionAwayFromFox).normalized * 1;
+
+        _agent.SetDestination(transform.position + zigzagOffset + directionAwayFromFox);
         
     }
 }
