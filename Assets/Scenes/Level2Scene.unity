@@ -559,6 +559,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5334373831623681834, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5335151351463113476, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: numFoxesAvailable
       value: 1000

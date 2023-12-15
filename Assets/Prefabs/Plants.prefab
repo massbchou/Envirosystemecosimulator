@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxScale: 2
   growRate: 1
-  maxAgeSeconds: 30
+  maxAgeSeconds: 60
   sizeVariancePercentage: 0.4
   startingScale: 0.1
 --- !u!1 &7904311496548371732
