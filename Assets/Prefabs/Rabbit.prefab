@@ -80,6 +80,8 @@ MonoBehaviour:
   _eatingDistance: 3
   _maxBelly: 40
   belly: 0
+  zigzagReversed: 0
+  zigzagTimer: 1
   _rabbitPrefab: {fileID: 3979611918914344191}
   _matingTime: 2
 --- !u!65 &5891553247218232108

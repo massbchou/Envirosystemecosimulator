@@ -87,7 +87,7 @@ MonoBehaviour:
   _readyToMate: 0
   isMating: 0
   _eatingDistance: 3
-  _maxBelly: 40
+  _maxBelly: 30
   _foxPrefab: {fileID: 8747189057095279578}
   _matingTime: 1
 --- !u!195 &4440843877694752816

@@ -32,7 +32,7 @@ public class Fox : Animal
         //wandering = false;
         base.Start();
         _agent.enabled = true;
-        belly = _maxBelly / 2;
+        belly = _maxBelly / 3;
         //ground = GameObject.Find("Ground");
 
         //initialize to idle state
@@ -108,7 +108,7 @@ public class Fox : Animal
         //kill rabbit and increase hunger
         Destroy(rabbit);
 
-        belly += _maxBelly / 2;
+        belly += _maxBelly / 3;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 11%, but not over double
@@ -125,7 +125,7 @@ public class Fox : Animal
         //destroy plant and increase hunger
         Destroy(plant.transform.parent.gameObject);
 
-        belly += _maxBelly / 4;
+        belly += _maxBelly / 6;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 5%, but not over double
