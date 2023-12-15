@@ -148,7 +148,7 @@ MonoBehaviour:
       prey!
     - Did you know that Snakes have been around for a very long time? Fossil evidence
       suggests that snakes evolved from a lizard-like ancestor around 150 million
-      years ago! Now let's go ahead and place some.
+      years ago!
     - ' Now let''s go ahead and place some. See if you can reduce the Rabbit population.'
     audioClips: []
   funFact1:
@@ -157,7 +157,7 @@ MonoBehaviour:
     - Nice job - now let's bring the rabbits back, this time with an advantage. Rabbits
       are well-known for their instinctive behavior of seeking refuge in burrows
       or bushes to evade predators.
-    - " Let\u2019s place some bushes to help the rabbits hide from predators. Try
+    - "Let\u2019s place some bushes to help the rabbits hide from predators. Try
       to keep the population of all animals in balance! Don't let any population
       get too high or too low"
     - In this arid environment, you'll have to supply plants manually. Good luck!
