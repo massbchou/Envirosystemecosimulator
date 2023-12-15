@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,12 +154,9 @@ MonoBehaviour:
   funFact1:
     name: David Attenborough
     sentences:
-    - Nice job - now let's bring the rabbits back, this time with an advantage. Rabbits
-      are well-known for their instinctive behavior of seeking refuge in burrows
-      or bushes to evade predators.
-    - "Let\u2019s place some bushes to help the rabbits hide from predators. Try
-      to keep the population of all animals in balance! Don't let any population
-      get too high or too low"
+    - Nice job - now let's bring the rabbits back
+    - Try to keep the population of all animals in balance! Don't let any population
+      get too high or too low
     - In this arid environment, you'll have to supply plants manually. Good luck!
     audioClips: []
   winDialogue:
@@ -180,6 +177,7 @@ MonoBehaviour:
   stabilityText: {fileID: 861865392}
   timeToMakeStable: 20
   timeToKeepStable: 60
+  timeToKillRabbits: 30
 --- !u!1 &390363998
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +565,10 @@ PrefabInstance:
       propertyPath: numFoxesAvailable
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 7958506586687574112, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_RemovedGameObjects: []
@@ -576,63 +578,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 284086863}
   m_SourcePrefab: {fileID: 100100000, guid: ffeb2306e8388604d88102892c770f44, type: 3}
---- !u!1001 &941027791
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 62.522224
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 55.182888
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4918681905331406560, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8747189057095279578, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
-      propertyPath: m_Name
-      value: Fox
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8f8bb86a83bfe72499d039818782ba6b, type: 3}
 --- !u!1001 &989998164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1665,7 +1610,6 @@ SceneRoots:
   - {fileID: 1518075420}
   - {fileID: 1586476017}
   - {fileID: 989998164}
-  - {fileID: 941027791}
   - {fileID: 1134897400}
   - {fileID: 1845064992}
   - {fileID: 1758630437}
