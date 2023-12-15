@@ -175,6 +175,11 @@ public class WorldOneManager : MonoBehaviour
 
     IEnumerator MakeStableCounter()
     {
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
+
         stabilityText.gameObject.SetActive(true);
 
         while (timeToMakeStable > 0)
@@ -189,6 +194,11 @@ public class WorldOneManager : MonoBehaviour
 
     IEnumerator KeepStableCounter()
     {
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
+
         while (timeToKeepStable > 0)
         {
             CheckLoss();

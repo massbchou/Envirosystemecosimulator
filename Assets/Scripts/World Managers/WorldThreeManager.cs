@@ -162,6 +162,11 @@ public class WorldThreeManager : MonoBehaviour
 
     IEnumerator MakeStableCounter()
     {
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
+
         stabilityText.gameObject.SetActive(true);
 
         while (timeToMakeStable > 0)
@@ -176,6 +181,11 @@ public class WorldThreeManager : MonoBehaviour
 
     IEnumerator KeepStableCounter()
     {
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
+
         while (timeToKeepStable > 0)
         {
             CheckLoss();

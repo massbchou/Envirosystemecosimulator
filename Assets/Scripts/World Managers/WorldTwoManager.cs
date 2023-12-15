@@ -28,6 +28,8 @@ public class WorldTwoManager : MonoBehaviour
 
     ItemPlacer itemPlacer;
     DialogueManager dialogueManager;
+    GrowPlants plantGrower;
+
 
     int numRabbits = 0;
     int numPlants = 0;
@@ -51,6 +53,7 @@ public class WorldTwoManager : MonoBehaviour
     void Start()
     {
         timePassedSinceLastDialogue = 0f;
+        plantGrower = FindObjectOfType<GrowPlants>();
 
         itemPlacer = FindObjectOfType<ItemPlacer>();
         dialogueManager = FindObjectOfType<DialogueManager>();
@@ -151,6 +154,11 @@ public class WorldTwoManager : MonoBehaviour
     
     IEnumerator KillRabbitsCounter()
     {
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
+
         stabilityText.gameObject.SetActive(true);
 
         while (timeToKillRabbits > 0)
@@ -191,6 +199,11 @@ public class WorldTwoManager : MonoBehaviour
 
     IEnumerator MakeStableCounter()
     {
+        plantGrower.growDelay = 4;
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
 
         while(timeToMakeStable > 0)
         {
@@ -204,6 +217,11 @@ public class WorldTwoManager : MonoBehaviour
 
     IEnumerator KeepStableCounter()
     {
+        while (dialogueManager.IsInDialogue())
+        {
+            yield return null;
+        }
+
         while (timeToKeepStable > 0)
         {
             CheckLoss();
