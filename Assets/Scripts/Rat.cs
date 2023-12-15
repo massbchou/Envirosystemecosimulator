@@ -174,7 +174,7 @@ public class Rat : Animal
 
     public bool NeedsToFlee()
     {
-        return FindTarget("Fox");
+        return FindRatPredator();
     }
 
     public GameObject FindRatPredator()

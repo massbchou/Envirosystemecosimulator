@@ -157,15 +157,20 @@ public class Fox : Animal
     public GameObject FindFoxFood()
     {
         GameObject nearRabbit = FindTarget("Rabbit");
+        GameObject nearRat = FindTarget("Rat");
         GameObject nearPlant = FindTarget("Plant");
 
         if (BadlyNeedsToEat() && nearPlant != null)
         {
             return nearPlant;
         }
-        else
+        else if (nearRabbit != null)
         {
             return nearRabbit;
+        }
+        else
+        {
+            return nearRat;
         }
     }
 

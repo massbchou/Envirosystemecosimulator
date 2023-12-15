@@ -104,9 +104,10 @@ GameObject:
   - component: {fileID: 8183622403148141109}
   - component: {fileID: 3723699446011499171}
   - component: {fileID: -3492779076783828648}
+  - component: {fileID: 8710289495660338211}
   m_Layer: 0
   m_Name: Snake
-  m_TagString: Untagged
+  m_TagString: Snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +177,27 @@ MonoBehaviour:
   _maxBelly: 20
   _snakePrefab: {fileID: 1334561194049440390}
   _matingTime: 1
+--- !u!65 &8710289495660338211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334561194049440390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2046327513313357506
 GameObject:
   m_ObjectHideFlags: 0
