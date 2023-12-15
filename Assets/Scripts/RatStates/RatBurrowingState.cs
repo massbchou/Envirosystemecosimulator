@@ -15,6 +15,9 @@ public class RatBurrowingState : RatAbstractState
         if (!animal.NeedsToFlee())
         {
             //leave burrow
+            Vector3 pos = animal.transform.position;
+            pos.y += 10f;
+            animal.transform.position = pos;
             animal.isBurrowed = false;
 
             animal.SwitchState(animal.Idle);
@@ -23,6 +26,9 @@ public class RatBurrowingState : RatAbstractState
         else if (animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance)
         {
             //go into burrow
+            Vector3 pos = animal.transform.position;
+            pos.y -= 10f;
+            animal.transform.position = pos;
             animal.isBurrowed = true;
         }
         else if (animal.HasNoGoodTarget())

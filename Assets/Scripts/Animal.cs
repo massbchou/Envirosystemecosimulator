@@ -65,7 +65,7 @@ public abstract class Animal : MonoBehaviour
                 if (!other._readyToMate) continue;
             }
 
-            if ( (string.Equals(desiredTag, "Rat") || string.Equals(desiredTag, "Rabbit")) && !this.CompareTag("Snake")) //only snakes can enter burrows to hunt
+            if ( (string.Equals(desiredTag, "Rat") || string.Equals(desiredTag, "Rabbit"))) //only snakes can enter burrows to hunt
             {
                 Animal other = collider.GetComponent<Animal>();
                 if (other.isBurrowed) continue;
