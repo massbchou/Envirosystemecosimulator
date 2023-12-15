@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 0}
-  _senseRadius: 10
+  _senseRadius: 15
   _targetTag: 
   _ground: {fileID: 0}
   _currentTarget: {fileID: 0}

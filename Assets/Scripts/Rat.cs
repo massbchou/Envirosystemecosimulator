@@ -12,6 +12,7 @@ public class Rat : Animal
     public RatMatingState Mating = new RatMatingState();
     public RatFleeingState Fleeing = new RatFleeingState();
     public RatForagingState Foraging = new RatForagingState();
+    public RatBurrowingState Burrowing = new RatBurrowingState();
     public RatDrinkingState Drinking = new RatDrinkingState();
 
     [SerializeField] public float _eatingDistance = 2f;

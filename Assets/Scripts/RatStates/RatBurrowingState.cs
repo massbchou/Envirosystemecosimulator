@@ -2,12 +2,11 @@
 //using System.Collections.Generic;
 using UnityEngine;
 
-public class RatFleeingState : RatAbstractState
+public class RatBurrowingState : RatAbstractState
 {
     public override void EnterState(Rat animal)
     {
-        Debug.Log("Rat entered fleeing state");
-        animal._currentTarget = animal.FindRatPredator();
+        animal._currentTarget = animal.FindTarget("Burrow");
     }
 
     public override void UpdateState(Rat animal)
@@ -15,18 +14,24 @@ public class RatFleeingState : RatAbstractState
         //if no longer need to flee, change state
         if (!animal.NeedsToFlee())
         {
+            //leave burrow
+            animal.isBurrowed = false;
+
             animal.SwitchState(animal.Idle);
             return;
         }
-        else if (animal.FindTarget("Burrow") && animal.DistanceTo(animal.FindTarget("Burrow").transform.position) < 5f)
+        else if (animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance)
         {
-            animal.SwitchState(animal.Burrowing);
-            return;
+            //go into burrow
+            animal.isBurrowed = true;
+        }
+        else if (animal.HasNoGoodTarget())
+        {
+            animal._currentTarget = animal.FindTarget("Burrow");
         }
         else
         {
-            animal._currentTarget = animal.FindRatPredator();
-            animal.GoAwayFromTarget();
+            animal.GoToTarget();
         }
     }
 

@@ -21,6 +21,8 @@ public abstract class Animal : MonoBehaviour
     public bool _readyToMate;
     public bool isMating = false; //variable that is true through the duration of the mate coroutine
 
+    public bool isBurrowed = false;
+
     //getters and setters
     public string TargetTag { get { return _targetTag; } set { _targetTag = value; } }
 
@@ -37,6 +39,8 @@ public abstract class Animal : MonoBehaviour
 
         _readyToMate = false;
         isMating = false;
+
+        isBurrowed = false;
     }
 
     public GameObject FindTarget(string desiredTag) //was protected
@@ -59,6 +63,12 @@ public abstract class Animal : MonoBehaviour
                 Animal other = collider.GetComponent<Animal>();
                 if (other == null) continue;
                 if (!other._readyToMate) continue;
+            }
+
+            if ( (string.Equals(desiredTag, "Rat") || string.Equals(desiredTag, "Rabbit")) && !this.CompareTag("Snake")) //only snakes can enter burrows to hunt
+            {
+                Animal other = collider.GetComponent<Animal>();
+                if (other.isBurrowed) continue;
             }
 
             //get distance to find closest
@@ -108,6 +118,11 @@ public abstract class Animal : MonoBehaviour
         _currentTargetPosition.z = Mathf.Clamp(_currentTargetPosition.z, _ground.groundZMin, _ground.groundZMax);
         _currentTargetPosition.y = Terrain.activeTerrain.SampleHeight(_currentTargetPosition);
 
+    }
+
+    public float DistanceTo(Vector3 target)
+    {
+        return Vector3.Distance(transform.position, target);
     }
 
     public void GetRandomTarget()

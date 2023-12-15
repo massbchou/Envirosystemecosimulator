@@ -11,6 +11,7 @@ TagManager:
   - P
   - Rat
   - Snake
+  - Burrow
   layers:
   - Default
   - TransparentFX

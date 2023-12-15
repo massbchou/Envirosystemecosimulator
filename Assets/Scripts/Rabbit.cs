@@ -12,6 +12,7 @@ public class Rabbit : Animal
     public RabbitMatingState Mating = new RabbitMatingState();
     public RabbitFleeingState Fleeing = new RabbitFleeingState();
     public RabbitForagingState Foraging = new RabbitForagingState();
+    public RabbitBurrowingState Burrowing = new RabbitBurrowingState();
     public RabbitDrinkingState Drinking = new RabbitDrinkingState();
 
     [SerializeField] public float _eatingDistance = 2f;
@@ -197,11 +198,6 @@ public class Rabbit : Animal
     public bool SeesMate()
     {
         return FindTarget("Rabbit") != null;
-    }
-
-    public float DistanceTo(Vector3 target)
-    {
-        return Vector3.Distance(transform.position, target);
     }
 
     public void GoAwayFromTarget()

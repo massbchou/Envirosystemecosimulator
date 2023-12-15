@@ -9,7 +9,6 @@ public class RabbitIdleState : RabbitAbstractState
     public override void EnterState(Rabbit animal)
     {
         Debug.Log("Rabbit entered idle state");
-        
         animal.GetRandomTarget();
     }
 
