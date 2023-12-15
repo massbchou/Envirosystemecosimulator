@@ -14,11 +14,15 @@ public class ItemPlacer : MonoBehaviour
     [SerializeField] Button _foxButton;
     [SerializeField] Button _plantButton;
     [SerializeField] Button _snakeButton;
+    [SerializeField] Button _burrowButton;
+    [SerializeField] Button _ratButton;
 
     [SerializeField] GameObject _rabbit;
     [SerializeField] GameObject _fox;
     [SerializeField] GameObject _plant;
     [SerializeField] GameObject _snake;
+    [SerializeField] GameObject _burrow;
+    [SerializeField] GameObject _rat;
 
     [SerializeField] GameObject crosshair;
     Color crosshairColor = Color.green;
@@ -35,11 +39,15 @@ public class ItemPlacer : MonoBehaviour
         _rabbitButton.onClick.AddListener(SelectRabbit);
         _foxButton.onClick.AddListener(SelectFox);
         _snakeButton.onClick.AddListener(SelectSnake);
+        _burrowButton.onClick.AddListener(SelectBurrow);
+        _ratButton.onClick.AddListener(SelectRat);
 
         _foxButton.gameObject.SetActive(false);
         _rabbitButton.gameObject.SetActive(false);
         _plantButton.gameObject.SetActive(false);
         _snakeButton.gameObject.SetActive(false);
+        _burrowButton.gameObject.SetActive(false);
+        _ratButton.gameObject.SetActive(false);
 
     }
 
@@ -66,6 +74,18 @@ public class ItemPlacer : MonoBehaviour
         _currentSelection = _snake;
         crosshairColor = new Color(1.0f, 0.27f, 0.0f);
     }
+    
+    void SelectBurrow()
+    {
+        _currentSelection = _burrow;
+        crosshairColor = new Color(0.3f, 0.3f, 0.3f);
+    }
+    
+    void SelectRat()
+    {
+        _currentSelection = _rat;
+        crosshairColor = new Color(1.0f, 0.64f, 0.0f);
+    }
 
     public void EnablePlantButton()
     {
@@ -83,6 +103,16 @@ public class ItemPlacer : MonoBehaviour
     public void EnableSnakeButton()
     {
         _snakeButton.gameObject.SetActive(true);
+    }
+    
+    public void EnableBurrowButton()
+    {
+        _burrowButton.gameObject.SetActive(true);
+    }
+    
+    public void EnableRatButton()
+    {
+        _ratButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

@@ -107,7 +107,7 @@ public class WorldTwoManager : MonoBehaviour
 
             continueButton.onClick.RemoveAllListeners();
             continueButton.onClick.AddListener(RestartLevel);
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
 
         //TODO: GIVE PLAYER BURROWS TO PLACE HERE

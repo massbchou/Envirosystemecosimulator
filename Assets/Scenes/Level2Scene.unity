@@ -176,7 +176,7 @@ MonoBehaviour:
   plantCounter: {fileID: 679781266}
   rabbitCounter: {fileID: 2057728273}
   foxCounter: {fileID: 1235098134}
-  snakeCounter: {fileID: 0}
+  snakeCounter: {fileID: 1789081150}
   stabilityText: {fileID: 861865392}
   timeToMakeStable: 20
   timeToKeepStable: 60
@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5229121646884183278, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5335151351463113476, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: numFoxesAvailable
@@ -1449,6 +1449,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 809c7bf0126a3a04d8376be71abe1a73, type: 3}
+--- !u!114 &1789081150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1825362317028364690, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+  m_PrefabInstance: {fileID: 925986231}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1845064992
 PrefabInstance:
   m_ObjectHideFlags: 0
