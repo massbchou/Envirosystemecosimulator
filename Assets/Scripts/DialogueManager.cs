@@ -62,6 +62,12 @@ public class DialogueManager : MonoBehaviour
         else
             audioClip = audioClips.Dequeue();
         
+        //if audio clip is playing somewhere else, stop it
+        if (audioSource.isPlaying)
+        {
+            Debug.Log("Stopping audio");
+            audioSource.Stop();
+        }
         if (audioClip != null && audioSource != null)
         {
             audioSource.PlayOneShot(audioClip);
@@ -83,6 +89,8 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        //end all audio
+        
         animator.SetBool("isOpen", false);
     }
 }
