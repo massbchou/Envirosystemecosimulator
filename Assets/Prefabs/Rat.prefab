@@ -519,10 +519,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5404265886551884590}
-  - component: {fileID: 5919335550371343566}
   - component: {fileID: 435551697974359722}
   - component: {fileID: -1515288570297873966}
   - component: {fileID: -2416851614317928192}
+  - component: {fileID: 6001795840199433185}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Rat
@@ -550,37 +550,6 @@ Transform:
   - {fileID: 9092821829237737902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &5919335550371343566
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943629696614387238}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 0.28533918, z: -0.050634146}
-  m_Size: 0.9560847
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.95
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 7899583552287203242}
-  - screenRelativeHeight: 0.7
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 3261207236912797965}
-  - screenRelativeHeight: 0.35
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 6057810797631849029}
-  - screenRelativeHeight: 0.05
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 8481993678478373618}
-  m_Enabled: 1
 --- !u!95 &435551697974359722
 Animator:
   serializedVersion: 5
@@ -652,6 +621,27 @@ MonoBehaviour:
   _ratPrefab: {fileID: 6943629696614387238}
   _burrowPrefab: {fileID: 6909832137687961030, guid: 7f69a796b9fee4c2595e8ce4496a0442, type: 3}
   _matingTime: 1
+--- !u!65 &6001795840199433185
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943629696614387238}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7472856222945646593
 GameObject:
   m_ObjectHideFlags: 0

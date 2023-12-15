@@ -6,6 +6,7 @@ public class RatForagingState : RatAbstractState
 {
     public override void EnterState(Rat animal)
     {
+        Debug.Log("Rat entered foraging state");
         animal._currentTarget = animal.FindTarget("Plant");
     }
 

@@ -182,13 +182,13 @@ public class Rat : Animal
         GameObject nearFox = FindTarget("Fox");
         GameObject nearSnake = FindTarget("Snake");
 
-        if (nearFox != null)
+        if (nearSnake != null)
         {
-            return nearFox;
+            return nearSnake;
         }
         else
         {
-            return nearSnake;
+            return nearFox;
         }
     }
 

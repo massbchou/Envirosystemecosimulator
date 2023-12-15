@@ -6,6 +6,7 @@ public class RatFleeingState : RatAbstractState
 {
     public override void EnterState(Rat animal)
     {
+        Debug.Log("Rat entered fleeing state");
         animal._currentTarget = animal.FindRatPredator();
     }
 
