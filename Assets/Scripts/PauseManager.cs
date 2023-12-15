@@ -1,15 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
     private bool isPaused = false;
     public GameObject playButton;
+    public GameObject exitButton;
 
+   
     private void Start()
     {
         isPaused = false;
         playButton.SetActive(false);
+        exitButton.SetActive(false);
         playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { TogglePause(); });
+        exitButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { HandleExit(); });
     }
 
     void Update()
@@ -27,18 +33,23 @@ public class PauseManager : MonoBehaviour
 
         if (isPaused)
         {
-            Time.timeScale = 0f; // Pause the game by setting time scale to zero
+            Time.timeScale = 0f; // Pause the game by setting time scale to zero    
+            exitButton.SetActive(true);
             playButton.SetActive(true);
-            //on click of play button, set isPaused to false and timeScale to 1
-            
-            
-
         }
         else
         {
             playButton.SetActive(false);
+            exitButton.SetActive(false);
             Time.timeScale = 1f; 
             
         }
+    }
+
+    void HandleExit(){
+        playButton.SetActive(false);
+        exitButton.SetActive(false);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -141,6 +141,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 1945649793}
+  exitButton: {fileID: 393551842}
+--- !u!1 &393551842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3041376971046276843, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+  m_PrefabInstance: {fileID: 1870491078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &656071298
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +523,7 @@ PrefabInstance:
     - {fileID: 5294675158534585640, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2143234648700177964, guid: ffeb2306e8388604d88102892c770f44, type: 3}
-      insertIndex: -1
+      insertIndex: 9
       addedObject: {fileID: 1945649794}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2124530911675278846, guid: ffeb2306e8388604d88102892c770f44, type: 3}
@@ -609,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3794789854660388259, guid: 70f14abc21fa6114aaf473d1a1ef7c49, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 3794789854660388259, guid: 70f14abc21fa6114aaf473d1a1ef7c49, type: 3}
       propertyPath: m_AnchoredPosition.y
