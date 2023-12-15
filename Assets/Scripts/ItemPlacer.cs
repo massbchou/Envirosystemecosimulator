@@ -13,10 +13,12 @@ public class ItemPlacer : MonoBehaviour
     [SerializeField] Button _rabbitButton;
     [SerializeField] Button _foxButton;
     [SerializeField] Button _plantButton;
+    [SerializeField] Button _snakeButton;
 
     [SerializeField] GameObject _rabbit;
     [SerializeField] GameObject _fox;
     [SerializeField] GameObject _plant;
+    [SerializeField] GameObject _snake;
 
     [SerializeField] GameObject crosshair;
     Color crosshairColor = Color.green;
@@ -32,10 +34,12 @@ public class ItemPlacer : MonoBehaviour
         _plantButton.onClick.AddListener(SelectPlant);
         _rabbitButton.onClick.AddListener(SelectRabbit);
         _foxButton.onClick.AddListener(SelectFox);
+        _snakeButton.onClick.AddListener(SelectSnake);
 
         _foxButton.gameObject.SetActive(false);
         _rabbitButton.gameObject.SetActive(false);
         _plantButton.gameObject.SetActive(false);
+        _snakeButton.gameObject.SetActive(false);
 
     }
 
@@ -56,6 +60,12 @@ public class ItemPlacer : MonoBehaviour
         _currentSelection = _fox;
         crosshairColor = new Color(1.0f, 0.64f, 0.0f);
     }
+    
+    void SelectSnake()
+    {
+        _currentSelection = _snake;
+        crosshairColor = new Color(1.0f, 0.27f, 0.0f);
+    }
 
     public void EnablePlantButton()
     {
@@ -68,6 +78,11 @@ public class ItemPlacer : MonoBehaviour
     public void EnableFoxButton()
     {
         _foxButton.gameObject.SetActive(true);
+    }
+    
+    public void EnableSnakeButton()
+    {
+        _snakeButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

@@ -32,12 +32,14 @@ public class WorldTwoManager : MonoBehaviour
     int numRabbits = 0;
     int numPlants = 0;
     int numFoxes = 0;
+    int numSnakes = 0;
 
     [SerializeField] Button continueButton;
 
     [SerializeField] Text plantCounter;
     [SerializeField] Text rabbitCounter;
     [SerializeField] Text foxCounter;
+    [SerializeField] Text snakeCounter;
 
     [SerializeField] Text stabilityText;
 
@@ -62,6 +64,7 @@ public class WorldTwoManager : MonoBehaviour
         plantCounter.text = "Plants: 0";
         rabbitCounter.text = "Rabbits: 0";
         foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+        snakeCounter.text = "Snakes: 0";
 
     }
 
@@ -89,6 +92,7 @@ public class WorldTwoManager : MonoBehaviour
             itemPlacer.EnableFoxButton();
             itemPlacer.EnableRabbitButton();
             itemPlacer.EnablePlantButton();
+            itemPlacer.EnableSnakeButton();
 
             timePassedSinceLastDialogue = 0f;
         }
@@ -134,6 +138,10 @@ public class WorldTwoManager : MonoBehaviour
             GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
             numFoxes = foxes.Length;
             foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+            
+            GameObject[] snakes = GameObject.FindGameObjectsWithTag("Snake");
+            numSnakes = snakes.Length;
+            snakeCounter.text = "Snakes: " + numSnakes.ToString();
 
             yield return new WaitForSeconds(waitTime);
         }
