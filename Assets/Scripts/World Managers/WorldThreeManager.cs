@@ -32,12 +32,15 @@ public class WorldThreeManager : MonoBehaviour
     int numRabbits = 0;
     int numPlants = 0;
     int numFoxes = 0;
-
+    int numRats = 0;
+    int numSnakes = 0;
     [SerializeField] Button continueButton;
 
     [SerializeField] Text plantCounter;
     [SerializeField] Text rabbitCounter;
     [SerializeField] Text foxCounter;
+    [SerializeField] Text ratCounter;
+    [SerializeField] Text snakeCounter;
 
     [SerializeField] Text stabilityText;
 
@@ -81,40 +84,38 @@ public class WorldThreeManager : MonoBehaviour
             StopCoroutine(CountTimeNotInDialogue());
         }
 
-        //introduce sneks
+        //introduce rats
         if (!playedFact0)
         {
             playedFact0 = true;
             dialogueManager.StartDialogue(funFact0);
-            itemPlacer.EnableFoxButton();
-            itemPlacer.EnableRabbitButton();
+            // itemPlacer.EnableFoxButton();
+            // itemPlacer.EnableRabbitButton();
             itemPlacer.EnablePlantButton();
-
+            itemPlacer.EnableRatButton();
             timePassedSinceLastDialogue = 0f;
         }
 
         //Player hasn't reduced rabbits in time
-        if (playedFact0 && !playedFact1 && timePassedSinceLastDialogue > 20 && numRabbits >= 5)
-        {
-            playedLoseDialogue = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
-            timePassedSinceLastDialogue = 0f;
-            continueButton.gameObject.SetActive(true);
-
-            continueButton.onClick.RemoveAllListeners();
-            continueButton.onClick.AddListener(RestartLevel);
-            Time.timeScale = 0;
-        }
-
-        //TODO: GIVE PLAYER BURROWS TO PLACE HERE
-        if (!playedFact1 && playedFact0 && numRabbits <= 3)
+        if (playedFact0 && !playedFact1 && timePassedSinceLastDialogue > 20)
         {
             playedFact1 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
             timePassedSinceLastDialogue = 0f;
-
-            StartCoroutine(MakeStableCounter());
+            itemPlacer.EnableFoxButton();
+            itemPlacer.EnableRabbitButton();
+            itemPlacer.EnableSnakeButton();
         }
+
+        // //TODO: GIVE PLAYER BURROWS TO PLACE HERE
+        // if (!playedFact1 && playedFact0 && numRabbits <= 3)
+        // {
+        //     playedFact1 = true;
+        //     FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
+        //     timePassedSinceLastDialogue = 0f;
+
+        //     StartCoroutine(MakeStableCounter());
+        // }
 
     }
 
@@ -134,6 +135,15 @@ public class WorldThreeManager : MonoBehaviour
             GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
             numFoxes = foxes.Length;
             foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+
+            GameObject[] rats = GameObject.FindGameObjectsWithTag("Rat");
+            numRats = rats.Length;
+            ratCounter.text = "Rats: " + numRats.ToString() + " (Available: " + itemPlacer.numRatsAvailable + ")";
+
+            GameObject[] snakes = GameObject.FindGameObjectsWithTag("Snake");
+            numSnakes = snakes.Length;
+            snakeCounter.text = "Snakes: " + numSnakes.ToString() + " (Available: " + itemPlacer.numSnakesAvailable + ")";
+
 
             yield return new WaitForSeconds(waitTime);
         }

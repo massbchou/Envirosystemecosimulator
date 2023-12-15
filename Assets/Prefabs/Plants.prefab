@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cb12d74b60240efbd5217a3209a3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: 2
+  avgMaxScale: 2
   growRate: 1
-  maxAgeSeconds: 60
+  maxAgeSeconds: 30
   sizeVariancePercentage: 0.4
   startingScale: 0.1
 --- !u!1 &7904311496548371732

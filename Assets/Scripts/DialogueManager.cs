@@ -52,6 +52,10 @@ public class DialogueManager : MonoBehaviour
     {
         if(sentences.Count == 0)
         {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
             EndDialogue();
             return;
         }
@@ -65,7 +69,6 @@ public class DialogueManager : MonoBehaviour
         //if audio clip is playing somewhere else, stop it
         if (audioSource.isPlaying)
         {
-            Debug.Log("Stopping audio");
             audioSource.Stop();
         }
         if (audioClip != null && audioSource != null)
