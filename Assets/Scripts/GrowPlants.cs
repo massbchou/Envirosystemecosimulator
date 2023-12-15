@@ -8,7 +8,7 @@ public class GrowPlants : MonoBehaviour
     public GameObject plantPrefab;
     [SerializeField] private GameObject groundPlane;
 
-    public float growRate = 1f;
+    public float growDelay = 1f;
     
 
     private Vector3 groundCenter;
@@ -47,7 +47,7 @@ public class GrowPlants : MonoBehaviour
         while (true)
         {
             GrowNewPlant();
-            yield return new WaitForSeconds(growRate + Random.Range(-0.5f, 0.5f));
+            yield return new WaitForSeconds(growDelay + Random.Range(-0.5f, 0.5f));
         }
     }
     

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 enum selected{
 
@@ -91,7 +92,7 @@ public class ItemPlacer : MonoBehaviour
 
 
         //RAYCAST FOR ITEM PLACEMENT
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _currentSelection != null)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _currentSelection != null && !EventSystem.current.IsPointerOverGameObject())
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitData;
