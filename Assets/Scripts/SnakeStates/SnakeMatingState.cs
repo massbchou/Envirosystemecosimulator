@@ -7,7 +7,6 @@ public class SnakeMatingState : SnakeAbstractState
     public override void EnterState(Snake animal)
     {
         Debug.Log("Snake entered mating state");
-
         animal._currentTarget = animal.FindTarget("Snake");
     }
 
