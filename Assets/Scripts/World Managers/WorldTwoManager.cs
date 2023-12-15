@@ -116,7 +116,7 @@ public class WorldTwoManager : MonoBehaviour
             playedFact1 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
             timePassedSinceLastDialogue = 0f;
-
+            itemPlacer.EnableBurrowButton();
             StartCoroutine(MakeStableCounter());
         }
 
