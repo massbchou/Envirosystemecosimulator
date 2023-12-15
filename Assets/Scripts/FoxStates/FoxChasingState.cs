@@ -39,7 +39,7 @@ public class FoxChasingState : FoxAbstractState
         //eat if able
         if (!animal.HasNoGoodTarget() && animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance)
         {
-            if (animal._currentTarget.CompareTag("Rabbit") || animal._currentTarget.CompareTag("Rat"))
+            if (animal._currentTarget.CompareTag("Rabbit") || animal._currentTarget.CompareTag("Rat") || animal._currentTarget.CompareTag("Snake"))
             {
                 animal.eatRabbit(animal._currentTarget);
             }

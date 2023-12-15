@@ -8,6 +8,7 @@ public class SnakeChasingState : SnakeAbstractState
 
     public override void EnterState(Snake animal)
     {
+        Debug.Log("Snake entered chasing state");
         animal._currentTarget = animal.FindSnakeFood();
     }
 
