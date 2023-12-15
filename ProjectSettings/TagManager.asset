@@ -9,7 +9,9 @@ TagManager:
   - Fox
   - New tag
   - P
+  - Rat
   - Snake
+  - Burrow
   layers:
   - Default
   - TransparentFX

@@ -2,15 +2,15 @@
 //using System.Collections.Generic;
 using UnityEngine;
 
-public class RabbitFleeingState : RabbitAbstractState
+public class RatFleeingState : RatAbstractState
 {
-    public override void EnterState(Rabbit animal)
+    public override void EnterState(Rat animal)
     {
-        Debug.Log("Rabbit entered fleeing state");
-        animal._currentTarget = animal.FindRabbitPredator();
+        Debug.Log("Rat entered fleeing state");
+        animal._currentTarget = animal.FindRatPredator();
     }
 
-    public override void UpdateState(Rabbit animal)
+    public override void UpdateState(Rat animal)
     {
         //if no longer need to flee, change state
         if (!animal.NeedsToFlee())
@@ -25,12 +25,12 @@ public class RabbitFleeingState : RabbitAbstractState
         }
         else
         {
-            animal._currentTarget = animal.FindRabbitPredator();
+            animal._currentTarget = animal.FindRatPredator();
             animal.GoAwayFromTarget();
-        } 
+        }
     }
 
-    public override void OnCollisionEnter(Rabbit animal)
+    public override void OnCollisionEnter(Rat animal)
     {
 
     }

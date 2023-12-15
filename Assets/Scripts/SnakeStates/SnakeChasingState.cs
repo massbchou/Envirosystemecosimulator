@@ -8,6 +8,7 @@ public class SnakeChasingState : SnakeAbstractState
 
     public override void EnterState(Snake animal)
     {
+        Debug.Log("Snake entered chasing state");
         animal._currentTarget = animal.FindSnakeFood();
     }
 
@@ -44,7 +45,7 @@ public class SnakeChasingState : SnakeAbstractState
         //eat if able
         if (!animal.HasNoGoodTarget() && animal.DistanceTo(animal._currentTargetPosition) < animal._eatingDistance)
         {
-            if (animal._currentTarget.CompareTag("Rabbit"))
+            if (animal._currentTarget.CompareTag("Rabbit") || animal._currentTarget.CompareTag("Rat"))
             {
                 animal.eatRabbit(animal._currentTarget);
             }

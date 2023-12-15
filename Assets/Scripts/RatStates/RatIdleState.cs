@@ -2,19 +2,19 @@
 //using System.Collections.Generic;
 using UnityEngine;
 
-public class RabbitIdleState : RabbitAbstractState
+public class RatIdleState : RatAbstractState
 {
 
 
-    public override void EnterState(Rabbit animal)
+    public override void EnterState(Rat animal)
     {
-        Debug.Log("Rabbit entered idle state");
+        Debug.Log("Rat entered idle state");
         animal.GetRandomTarget();
     }
 
-    public override void UpdateState(Rabbit animal)
+    public override void UpdateState(Rat animal)
     {
-        //if rabbit needs to flee or eat, or rabbit has reached destination, pick other activity
+        //if Rat needs to flee or eat, or Rat has reached destination, pick other activity
         if (animal.NeedsToFlee())
         {
             animal.SwitchState(animal.Fleeing);
@@ -36,7 +36,7 @@ public class RabbitIdleState : RabbitAbstractState
         }
     }
 
-    public override void OnCollisionEnter(Rabbit animal)
+    public override void OnCollisionEnter(Rat animal)
     {
         
     }

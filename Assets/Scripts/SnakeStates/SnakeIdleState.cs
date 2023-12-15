@@ -7,7 +7,6 @@ public class SnakeIdleState : SnakeAbstractState
     public override void EnterState(Snake animal)
     {
         Debug.Log("Snake entered idle state");
-
         animal.GetRandomTarget();
     }
 

@@ -134,12 +134,22 @@ public class Snake : Animal
 
     public bool SeesFood()
     {
-        return FindTarget("Rabbit");
+        return FindSnakeFood();
     }
 
     public GameObject FindSnakeFood()
     {
-        return FindTarget("Rabbit");
+        GameObject nearRabbit = FindTarget("Rabbit");
+        GameObject nearRat = FindTarget("Rat");
+
+        if (nearRat != null)
+        {
+            return nearRat;
+        }
+        else
+        {
+            return nearRabbit;
+        }
     }
 
     public bool NeedsToDrink()

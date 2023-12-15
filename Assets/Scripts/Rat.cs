@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rabbit : Animal
+public class Rat : Animal
 {
-    //stores state of rabbit
-    RabbitAbstractState currentState;
+    //stores state of rat
+    RatAbstractState currentState;
 
-    //all states a rabbit can be in
-    public RabbitIdleState Idle = new RabbitIdleState();
-    public RabbitMatingState Mating = new RabbitMatingState();
-    public RabbitFleeingState Fleeing = new RabbitFleeingState();
-    public RabbitForagingState Foraging = new RabbitForagingState();
-    public RabbitBurrowingState Burrowing = new RabbitBurrowingState();
-    public RabbitDrinkingState Drinking = new RabbitDrinkingState();
+    //all states a rat can be in
+    public RatIdleState Idle = new RatIdleState();
+    public RatMatingState Mating = new RatMatingState();
+    public RatFleeingState Fleeing = new RatFleeingState();
+    public RatForagingState Foraging = new RatForagingState();
+    public RatBurrowingState Burrowing = new RatBurrowingState();
+    public RatDrinkingState Drinking = new RatDrinkingState();
 
     [SerializeField] public float _eatingDistance = 2f;
     [SerializeField] public float _maxBelly = 10f;
@@ -22,7 +22,8 @@ public class Rabbit : Animal
     public bool zigzagReversed = false;
     public float zigzagTimer = 1.0f;
 
-    [SerializeField] GameObject _rabbitPrefab; //baby to spawn
+    [SerializeField] GameObject _ratPrefab; //baby to spawn
+    [SerializeField] private GameObject _burrowPrefab; //burrow to spawn when rats mate
 
     [SerializeField] float _matingTime = 1f; //time it takes to mate
 
@@ -80,16 +81,16 @@ public class Rabbit : Animal
         }
     }
 
-    public void SwitchState(RabbitAbstractState state)
+    public void SwitchState(RatAbstractState state)
     {
         currentState = state;
         currentState.EnterState(this);
     }
 
-    //Spawn 0-3 new rabbits
-    public IEnumerator Mate(Rabbit other)
+    //Spawn 0-3 new rats
+    public IEnumerator Mate(Rat other)
     {
-        Debug.Log("Rabbits mating");
+        Debug.Log("Rats mating");
         isMating = true;
 
 
@@ -101,12 +102,16 @@ public class Rabbit : Animal
 
         belly = belly / 2 - 1;
 
-        for (int i = 0; i < Random.Range(1, 3); ++i)
+        for (int i = 0; i < Random.Range(2, 6); ++i)
         {
-            GameObject newRabbit = Instantiate(_rabbitPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
-            newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
+            GameObject newRat = Instantiate(_ratPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
+            newRat.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
+        //spawn burrow with random rotation
+        GameObject burrow = Instantiate(_burrowPrefab, transform.position, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
+        
+        
         isMating = false;
         _readyToMate = false;
 
@@ -170,21 +175,21 @@ public class Rabbit : Animal
 
     public bool NeedsToFlee()
     {
-        return FindRabbitPredator();
+        return FindRatPredator();
     }
 
-    public GameObject FindRabbitPredator()
+    public GameObject FindRatPredator()
     {
         GameObject nearFox = FindTarget("Fox");
         GameObject nearSnake = FindTarget("Snake");
 
-        if (nearFox != null)
+        if (nearSnake != null)
         {
-            return nearFox;
+            return nearSnake;
         }
         else
         {
-            return nearSnake;
+            return nearFox;
         }
     }
 
@@ -197,7 +202,12 @@ public class Rabbit : Animal
 
     public bool SeesMate()
     {
-        return FindTarget("Rabbit") != null;
+        return FindTarget("Rat") != null;
+    }
+
+    public float DistanceTo(Vector3 target)
+    {
+        return Vector3.Distance(transform.position, target);
     }
 
     public void GoAwayFromTarget()
@@ -208,9 +218,9 @@ public class Rabbit : Animal
         Vector3 directionToFox = _currentTargetPosition - transform.position;
         Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
 
-        Vector3 zigzagOffset = zigzagReversed ? Vector3.Cross(directionAwayFromFox, Vector3.up).normalized * -1 : Vector3.Cross(Vector3.up, directionAwayFromFox).normalized * 1;
+        //Vector3 zigzagOffset = zigzagReversed ? Vector3.Cross(directionAwayFromFox, Vector3.up).normalized * -1 : Vector3.Cross(Vector3.up, directionAwayFromFox).normalized * 1;
 
-        _agent.SetDestination(transform.position + zigzagOffset + directionAwayFromFox);
+        _agent.SetDestination(transform.position + directionAwayFromFox);
         
     }
 }
