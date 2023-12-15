@@ -172,6 +172,21 @@ public class Rabbit : Animal
         return FindTarget("Fox");
     }
 
+    public GameObject FindRabbitPredator()
+    {
+        GameObject nearFox = FindTarget("Fox");
+        GameObject nearSnake = FindTarget("Snake");
+
+        if (nearFox != null)
+        {
+            return nearFox;
+        }
+        else
+        {
+            return nearSnake;
+        }
+    }
+
     public bool WantsToMate()
     {
         _readyToMate = transform.localScale.z >= 1.05f && !NeedsToFlee() && !NeedsToEat();
