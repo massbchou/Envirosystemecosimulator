@@ -510,6 +510,96 @@ PrefabInstance:
       propertyPath: numFoxesAvailable
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact2.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact3.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact0.audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact1.audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact2.audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact3.audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact0.sentences.Array.data[0]
+      value: Did you know that plants reproduce using pollen? Some plants use pollinators
+        like bees to carry it, while others rely on wind to carry the pollen long
+        distances.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact2.sentences.Array.data[2]
+      value: Now go ahead and place some foxes to hunt the rabbits!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact3.sentences.Array.data[2]
+      value: Feel free to continue exploring the world or go onto the next level.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact0.audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: de15e0a71b5b94b6881242b26877f3ea, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact0.audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 17d5cf32f76c644a9a5c3b3da4903870, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact1.audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c9a015402fcd743f6963b7a5330a37cb, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact1.audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 059d3f927e37b4f98a09295ee09198d9, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact2.audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fbe1aec54ede44180883c0ec3014d792, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact2.audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7300c945c4bd24324be035cfa26c886d, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact3.audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: de4d3f0bdab0d48e5bb194c3ba83ab7d, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: funFact3.audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 532108f12f95348beb4aba521df8ad59, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: movementTutorial.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: movementTutorial.audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: movementTutorial.sentences.Array.data[1]
+      value: And you can press P to pause the game
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: movementTutorial.audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fab58aafa656041e8b3b7f120d756db2, type: 3}
+    - target: {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: movementTutorial.audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ff5823ffabf94ffbafc00f50a63417f, type: 3}
     - target: {fileID: 8180751696996761841, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: m_Enabled
       value: 0
