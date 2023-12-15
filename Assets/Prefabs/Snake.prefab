@@ -175,7 +175,7 @@ MonoBehaviour:
   _readyToMate: 0
   isMating: 0
   _eatingDistance: 3
-  _maxBelly: 20
+  _maxBelly: 30
   _snakePrefab: {fileID: 1334561194049440390}
   _matingTime: 1
 --- !u!65 &8710289495660338211
