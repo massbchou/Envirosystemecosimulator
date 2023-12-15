@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class WorldManager : MonoBehaviour
+public class WorldOneManager : MonoBehaviour
 {
     //This class is for managing the state of the world and the player's progress in it
+
 
     [SerializeField] Dialogue funFact0;
     bool playedFact0 = false;
@@ -20,18 +21,19 @@ public class WorldManager : MonoBehaviour
     [SerializeField] Dialogue movementTutorial;
     bool playedMovementTutorial = false;
 
-    [SerializeField] Dialogue funFact2;
-    bool playedFact2 = false;
+    [SerializeField] Dialogue winDialogue;
+    bool playedWinDialogue = false;
 
-    [SerializeField] Dialogue funFact3;
-    bool playedFact3 = false;
+    [SerializeField] Dialogue loseDialogue;
+    bool playedLoseDialogue = false;
+
 
     ItemPlacer itemPlacer;
     DialogueManager dialogueManager;
 
-    int numRabbits;
-    int numPlants;
-    int numFoxes;
+    int numRabbits = 0;
+    int numPlants = 0;
+    int numFoxes = 0;
 
     [SerializeField] Button continueButton;
 
@@ -60,13 +62,14 @@ public class WorldManager : MonoBehaviour
 
         plantCounter.text = "Plants: 0";
         rabbitCounter.text = "Rabbits: 0";
-        foxCounter.text = "Foxes: 0";
+        foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        //start or stop counter
         if (!dialogueManager.IsInDialogue() && !counting)
         {
             timePassedSinceLastDialogue = 0f;
@@ -79,6 +82,7 @@ public class WorldManager : MonoBehaviour
             StopCoroutine(CountTimeNotInDialogue());
         }
 
+        //introduce world
         if (!playedFact0)
         {
             playedFact0 = true;
@@ -87,15 +91,17 @@ public class WorldManager : MonoBehaviour
             timePassedSinceLastDialogue = 0f;
         }
 
-
+        //give player foxes
         if (timePassedSinceLastDialogue > 20 && !playedFact1)
         {
             playedFact1 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
-            itemPlacer.EnableRabbitButton();
+            itemPlacer.EnableFoxButton();
+            plantGrower.growRate = 1;
             timePassedSinceLastDialogue = 0f;
         }
 
+        //play movement tutorial
         if (timePassedSinceLastDialogue > 20 && !playedMovementTutorial)
         {
             playedMovementTutorial = true;
@@ -103,21 +109,30 @@ public class WorldManager : MonoBehaviour
             timePassedSinceLastDialogue = 0f;
         }
 
-        if (timePassedSinceLastDialogue > 20 && !playedFact2)
+        //Check loss condition after foxes are added
+        if (playedFact1 && !playedLoseDialogue)
         {
-            playedFact2 = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(funFact2);
-            itemPlacer.EnableFoxButton();
-            timePassedSinceLastDialogue = 0f;
+            if (numRabbits <= 1 || numFoxes >= 20)
+            {
+                playedLoseDialogue = true;
+                FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
+                timePassedSinceLastDialogue = 0f;
+                continueButton.gameObject.SetActive(true);
+
+                continueButton.onClick.RemoveAllListeners();
+                continueButton.onClick.AddListener(RestartLevel);
+            }
         }
 
-        if (timePassedSinceLastDialogue > 30 && !playedFact3)
+        //Check win condition 40 seconds after foxes are added
+        if (playedFact1 && timePassedSinceLastDialogue > 60)
         {
-            playedFact3 = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(funFact3);
-            continueButton.gameObject.SetActive(true);
+            playedWinDialogue = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(winDialogue);
             timePassedSinceLastDialogue = 0f;
+            continueButton.gameObject.SetActive(true);
         }
+
     }
 
     IEnumerator CountItemsInScene()
@@ -133,7 +148,7 @@ public class WorldManager : MonoBehaviour
             numPlants = plants.Length;
             plantCounter.text = "Plants: " + numPlants.ToString();
 
-            if(numPlants >= 2)
+            if (numPlants >= 2)
             {
                 plantGrower.shouldGrowPlants = true;
             }
@@ -144,7 +159,7 @@ public class WorldManager : MonoBehaviour
 
             GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
             numFoxes = foxes.Length;
-            foxCounter.text = "Foxes: " + numFoxes.ToString();
+            foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
 
             yield return new WaitForSeconds(waitTime);
         }
@@ -158,6 +173,12 @@ public class WorldManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             timePassedSinceLastDialogue += waitTime;
         }
+    }
+
+    void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     void GoToNextLevel()

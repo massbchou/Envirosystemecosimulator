@@ -8,7 +8,7 @@ public class GrowPlants : MonoBehaviour
     public GameObject plantPrefab;
     [SerializeField] private GameObject groundPlane;
 
-    [SerializeField] float growRate = 1f;
+    public float growRate = 1f;
     
 
     private Vector3 groundCenter;

@@ -11,7 +11,7 @@ public class Fox : Animal
     public FoxIdleState Idle = new FoxIdleState();
     public FoxChasingState Chasing = new FoxChasingState();
     public FoxMatingState Mating = new FoxMatingState();
-    public FoxDrinkingState Drinking = new foxDrinkingState();
+    public FoxDrinkingState Drinking = new FoxDrinkingState();
 
     GameObject ground;
     //bool wandering = false;

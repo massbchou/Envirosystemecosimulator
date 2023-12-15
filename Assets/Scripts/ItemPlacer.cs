@@ -22,6 +22,8 @@ public class ItemPlacer : MonoBehaviour
 
     GameObject _currentSelection;
 
+    public int numFoxesAvailable = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,10 +100,19 @@ public class ItemPlacer : MonoBehaviour
                 //don't place on top of other object of same type
                 if (!hitData.collider.gameObject.CompareTag(_currentSelection.tag))
                 {
+                    if(_currentSelection == _fox && numFoxesAvailable <= 0)
+                    {
+                        return;
+                    }
+
                     Vector3 worldPosition = hitData.point;
-                   //Vector3 normal = hit.normal;
 
                     Instantiate(_currentSelection, worldPosition + Vector3.up * 0.7f, Quaternion.identity);
+
+                    if(_currentSelection == _fox)
+                    {
+                        numFoxesAvailable -= 1;
+                    }
                 }
             }
         }
