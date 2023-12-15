@@ -169,7 +169,7 @@ public class Rabbit : Animal
 
     public bool NeedsToFlee()
     {
-        return FindTarget("Fox");
+        return FindRabbitPredator();
     }
 
     public GameObject FindRabbitPredator()

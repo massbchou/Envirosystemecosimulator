@@ -32,7 +32,7 @@ public class Snake : Animal
         //wandering = false;
         base.Start();
         _agent.enabled = true;
-        belly = _maxBelly / 3;
+        belly = _maxBelly / 2;
         //ground = GameObject.Find("Ground");
 
         //initialize to idle state
@@ -108,7 +108,7 @@ public class Snake : Animal
         //kill rabbit and increase hunger
         Destroy(rabbit);
 
-        belly += _maxBelly / 3;
+        belly += _maxBelly / 2;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 11%, but not over double
