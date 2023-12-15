@@ -45,6 +45,7 @@ public class WorldTwoManager : MonoBehaviour
 
     [SerializeField] int timeToMakeStable = 20;
     [SerializeField] int timeToKeepStable = 60;
+    [SerializeField] int timeToKillRabbits = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +64,7 @@ public class WorldTwoManager : MonoBehaviour
 
         plantCounter.text = "Plants: 0";
         rabbitCounter.text = "Rabbits: 0";
-        foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+        foxCounter.text = "";
         snakeCounter.text = "Snakes: 0";
 
     }
@@ -87,38 +88,18 @@ public class WorldTwoManager : MonoBehaviour
         //introduce sneks
         if (!playedFact0)
         {
+           // Debug.Log("here");
             playedFact0 = true;
             dialogueManager.StartDialogue(funFact0);
-            itemPlacer.EnableFoxButton();
-            itemPlacer.EnableRabbitButton();
+           // itemPlacer.EnableFoxButton();
             itemPlacer.EnablePlantButton();
             itemPlacer.EnableSnakeButton();
 
             timePassedSinceLastDialogue = 0f;
+            StartCoroutine(KillRabbitsCounter());
+
         }
 
-        //Player hasn't reduced rabbits in time
-        if(playedFact0 && !playedFact1 && timePassedSinceLastDialogue > 20 && numRabbits >= 5)
-        {
-            playedLoseDialogue = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
-            timePassedSinceLastDialogue = 0f;
-            continueButton.gameObject.SetActive(true);
-
-            continueButton.onClick.RemoveAllListeners();
-            continueButton.onClick.AddListener(RestartLevel);
-            //Time.timeScale = 0;
-        }
-
-        //TODO: GIVE PLAYER BURROWS TO PLACE HERE
-        if (!playedFact1 && playedFact0 && numRabbits <= 3)
-        {
-            playedFact1 = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
-            timePassedSinceLastDialogue = 0f;
-
-            StartCoroutine(MakeStableCounter());
-        }
 
     }
 
@@ -135,9 +116,9 @@ public class WorldTwoManager : MonoBehaviour
             numPlants = plants.Length;
             plantCounter.text = "Plants: " + numPlants.ToString();
 
-            GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
-            numFoxes = foxes.Length;
-            foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+           /* GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
+            numFoxes = foxes.Length;*/
+          //  foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
             
             GameObject[] snakes = GameObject.FindGameObjectsWithTag("Snake");
             numSnakes = snakes.Length;
@@ -167,10 +148,49 @@ public class WorldTwoManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    
+    IEnumerator KillRabbitsCounter()
+    {
+        stabilityText.gameObject.SetActive(true);
+
+        while (timeToKillRabbits > 0)
+        {
+            stabilityText.text = "Time to reduce rabbits: " + timeToKillRabbits;
+            timeToKillRabbits -= 1;
+
+            if (numRabbits < 3)
+            {
+                break;
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+
+        if (numRabbits < 3)
+        {
+            playedFact1 = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
+            itemPlacer.EnableRabbitButton();
+
+            timePassedSinceLastDialogue = 0f;
+            StartCoroutine(MakeStableCounter());
+
+        }
+        else
+        {
+            playedLoseDialogue = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
+            timePassedSinceLastDialogue = 0f;
+            continueButton.gameObject.SetActive(true);
+
+
+            continueButton.onClick.RemoveAllListeners();
+            continueButton.onClick.AddListener(RestartLevel);
+        }
+    }
 
     IEnumerator MakeStableCounter()
     {
-        stabilityText.gameObject.SetActive(true);
 
         while(timeToMakeStable > 0)
         {
@@ -202,7 +222,7 @@ public class WorldTwoManager : MonoBehaviour
 
     void CheckLoss()
     {
-        if (numRabbits <= 2 || numRabbits > 100 || numFoxes >= 20 || numFoxes <= 0)
+        if (numRabbits <= 2 || numRabbits > 100 || numSnakes >= 20 || numSnakes <= 0)
         {
             StopAllCoroutines();
             playedLoseDialogue = true;
