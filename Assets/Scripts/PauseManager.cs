@@ -5,6 +5,12 @@ public class PauseManager : MonoBehaviour
     private bool isPaused = false;
     public GameObject playButton;
 
+    private void Start()
+    {
+        isPaused = false;
+        playButton.SetActive(false);
+    }
+
     void Update()
     {
         //Input is P for pause

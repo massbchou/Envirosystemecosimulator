@@ -43,6 +43,12 @@ public class WorldOneManager : MonoBehaviour
 
     GrowPlants plantGrower;
 
+    [SerializeField] Text stabilityText;
+
+
+    [SerializeField] int timeToMakeStable = 20;
+    [SerializeField] int timeToKeepStable = 60;
+
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +58,9 @@ public class WorldOneManager : MonoBehaviour
         itemPlacer = FindObjectOfType<ItemPlacer>();
         dialogueManager = FindObjectOfType<DialogueManager>();
         plantGrower = FindObjectOfType<GrowPlants>();
+
+        stabilityText.gameObject.SetActive(false);
+
 
         plantGrower.shouldGrowPlants = false;
 
@@ -97,8 +106,10 @@ public class WorldOneManager : MonoBehaviour
             playedFact1 = true;
             FindObjectOfType<DialogueManager>().StartDialogue(funFact1);
             itemPlacer.EnableFoxButton();
-            plantGrower.growRate = 1;
+            plantGrower.growDelay = 1;
             timePassedSinceLastDialogue = 0f;
+
+            StartCoroutine(MakeStableCounter());
         }
 
         //play movement tutorial
@@ -107,30 +118,6 @@ public class WorldOneManager : MonoBehaviour
             playedMovementTutorial = true;
             FindObjectOfType<DialogueManager>().StartDialogue(movementTutorial);
             timePassedSinceLastDialogue = 0f;
-        }
-
-        //Check loss condition after foxes are added
-        if (playedFact1 && !playedLoseDialogue)
-        {
-            if (numRabbits <= 1 || numFoxes >= 20)
-            {
-                playedLoseDialogue = true;
-                FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
-                timePassedSinceLastDialogue = 0f;
-                continueButton.gameObject.SetActive(true);
-
-                continueButton.onClick.RemoveAllListeners();
-                continueButton.onClick.AddListener(RestartLevel);
-            }
-        }
-
-        //Check win condition 40 seconds after foxes are added
-        if (playedFact1 && timePassedSinceLastDialogue > 60)
-        {
-            playedWinDialogue = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(winDialogue);
-            timePassedSinceLastDialogue = 0f;
-            continueButton.gameObject.SetActive(true);
         }
 
     }
@@ -184,6 +171,54 @@ public class WorldOneManager : MonoBehaviour
     void GoToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    IEnumerator MakeStableCounter()
+    {
+        stabilityText.gameObject.SetActive(true);
+
+        while (timeToMakeStable > 0)
+        {
+            stabilityText.text = "Time to make stable: " + timeToMakeStable;
+            timeToMakeStable -= 1;
+            yield return new WaitForSeconds(1);
+        }
+
+        StartCoroutine(KeepStableCounter());
+    }
+
+    IEnumerator KeepStableCounter()
+    {
+        while (timeToKeepStable > 0)
+        {
+            CheckLoss();
+
+            stabilityText.text = "Time to keep stable: " + timeToKeepStable;
+            timeToKeepStable -= 1;
+            yield return new WaitForSeconds(1);
+        }
+
+
+        playedWinDialogue = true;
+        FindObjectOfType<DialogueManager>().StartDialogue(winDialogue);
+        timePassedSinceLastDialogue = 0f;
+        continueButton.gameObject.SetActive(true);
+    }
+
+    void CheckLoss()
+    {
+        if (numRabbits <= 2 || numRabbits > 100 || numFoxes >= 20 || numFoxes <= 0)
+        {
+            StopAllCoroutines();
+            playedLoseDialogue = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
+            timePassedSinceLastDialogue = 0f;
+            continueButton.gameObject.SetActive(true);
+
+            continueButton.onClick.RemoveAllListeners();
+            continueButton.onClick.AddListener(RestartLevel);
+
+        }
     }
 
 }
