@@ -80,7 +80,7 @@ public class ItemPlacer : MonoBehaviour
         {
             crosshair.transform.position = hit.point + new Vector3(0, 0.4f, 0);
 
-            if (_currentSelection == null || hit.collider.gameObject.CompareTag(_currentSelection.tag))
+            if (_currentSelection == null || hit.collider.gameObject.CompareTag(_currentSelection.tag) || (_currentSelection.CompareTag("P") && hit.collider.CompareTag("Plant")))
             {
                 crosshair.GetComponent<SpriteRenderer>().color = Color.red;
             }
@@ -98,23 +98,26 @@ public class ItemPlacer : MonoBehaviour
             RaycastHit hitData;
             if (Physics.Raycast(ray, out hitData, 1000))
             {
-                //don't place on top of other object of same type
-                if (!hitData.collider.gameObject.CompareTag(_currentSelection.tag))
+                //don't place on top of other object of same type, with special check for plants
+                if (hitData.collider.CompareTag(_currentSelection.tag)  || (_currentSelection.CompareTag("P") && hit.collider.CompareTag("Plant")))
                 {
-                    if(_currentSelection == _fox && numFoxesAvailable <= 0)
-                    {
-                        return;
-                    }
-
-                    Vector3 worldPosition = hitData.point;
-
-                    Instantiate(_currentSelection, worldPosition + Vector3.up * 0.7f, Quaternion.identity);
-
-                    if(_currentSelection == _fox)
-                    {
-                        numFoxesAvailable -= 1;
-                    }
+                    return;
                 }
+                
+                if(_currentSelection == _fox && numFoxesAvailable <= 0)
+                {
+                    return;
+                }
+
+                Vector3 worldPosition = hitData.point;
+
+                Instantiate(_currentSelection, worldPosition + Vector3.up * 0.7f, Quaternion.identity);
+
+                if(_currentSelection == _fox)
+                {
+                    numFoxesAvailable -= 1;
+                }
+                
             }
         }
 
