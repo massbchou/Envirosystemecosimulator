@@ -11,11 +11,12 @@ public class PauseManager : MonoBehaviour
    
     private void Start()
     {
+        playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { TogglePause(); });
+        exitButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { HandleExit(); });
         isPaused = false;
         playButton.SetActive(false);
         exitButton.SetActive(false);
-        playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { TogglePause(); });
-        exitButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { HandleExit(); });
+
     }
 
     void Update()

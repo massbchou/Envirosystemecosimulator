@@ -1879,6 +1879,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5310107010751985390, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5335151351463113476, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: numFoxesAvailable
       value: 7
@@ -1891,8 +1895,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -324.4556
       objectReference: {fileID: 0}
+    - target: {fileID: 7958506586687574112, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180751696996761841, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: playButton
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7716659308345417464, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+    - {fileID: 8180751696996761841, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5294675158534585640, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_AddedGameObjects:

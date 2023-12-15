@@ -506,6 +506,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5310107010751985390, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5335151351463113476, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: numFoxesAvailable
       value: 1000
@@ -600,6 +604,10 @@ PrefabInstance:
       propertyPath: movementTutorial.audioClips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 4ff5823ffabf94ffbafc00f50a63417f, type: 3}
+    - target: {fileID: 7958506586687574112, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8180751696996761841, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -608,7 +616,8 @@ PrefabInstance:
       propertyPath: playButton
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8180751696996761841, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5294675158534585640, guid: ffeb2306e8388604d88102892c770f44, type: 3}
     m_AddedGameObjects:
