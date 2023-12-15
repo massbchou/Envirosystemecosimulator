@@ -9,6 +9,7 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = false;
         playButton.SetActive(false);
+        playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { TogglePause(); });
     }
 
     void Update()
@@ -29,7 +30,7 @@ public class PauseManager : MonoBehaviour
             Time.timeScale = 0f; // Pause the game by setting time scale to zero
             playButton.SetActive(true);
             //on click of play button, set isPaused to false and timeScale to 1
-            playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate { TogglePause(); });
+            
             
 
         }
