@@ -47,6 +47,8 @@ public class WorldThreeManager : MonoBehaviour
     [SerializeField] int timeToMakeStable = 20;
     [SerializeField] int timeToKeepStable = 60;
 
+    private int timeSinceStable = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,6 +109,29 @@ public class WorldThreeManager : MonoBehaviour
             itemPlacer.EnableSnakeButton();
         }
 
+        if (playedFact0 && playedFact1 && !playedWinDialogue)
+        {
+            Debug.Log("Stated coroutine");
+            StartCoroutine(KeepStableCounter());
+        }
+
+        // if (playedFact0 && playedFact1 && isStable())
+        // {
+        //     if (timeSinceStable > timeToKeepStable)
+        //     {
+        //         playedWinDialogue = true;
+        //         FindObjectOfType<DialogueManager>().StartDialogue(winDialogue);
+        //         timePassedSinceLastDialogue = 0f;
+        //         continueButton.gameObject.SetActive(true);
+        //     }
+        //     else
+        //     {
+        //         timeSinceStable += 1;
+        //     }
+        
+        // }
+           
+
         // //TODO: GIVE PLAYER BURROWS TO PLACE HERE
         // if (!playedFact1 && playedFact0 && numRabbits <= 3)
         // {
@@ -134,18 +159,29 @@ public class WorldThreeManager : MonoBehaviour
 
             GameObject[] foxes = GameObject.FindGameObjectsWithTag("Fox");
             numFoxes = foxes.Length;
-            foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+            foxCounter.text = "Foxes: " + numFoxes.ToString();
 
             GameObject[] rats = GameObject.FindGameObjectsWithTag("Rat");
             numRats = rats.Length;
-            ratCounter.text = "Rats: " + numRats.ToString() + " (Available: " + itemPlacer.numRatsAvailable + ")";
+            ratCounter.text = "Rats: " + numRats.ToString();
 
             GameObject[] snakes = GameObject.FindGameObjectsWithTag("Snake");
             numSnakes = snakes.Length;
-            snakeCounter.text = "Snakes: " + numSnakes.ToString() + " (Available: " + itemPlacer.numSnakesAvailable + ")";
-
+            snakeCounter.text = "Snakes: " + numSnakes.ToString();
 
             yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    bool isStable()
+    {
+        if (numRabbits >=1  && numFoxes >=1 && numRats >= 1 && numSnakes >=1 && numPlants >= 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -191,6 +227,7 @@ public class WorldThreeManager : MonoBehaviour
 
     IEnumerator KeepStableCounter()
     {
+        stabilityText.gameObject.SetActive(true);
         while (dialogueManager.IsInDialogue())
         {
             yield return null;
@@ -198,7 +235,13 @@ public class WorldThreeManager : MonoBehaviour
 
         while (timeToKeepStable > 0)
         {
-            CheckLoss();
+            if (!isStable())
+            {
+                timeToKeepStable = 60;
+                // StartCoroutine(MakeStableCounter());
+                stabilityText.text = "Time to keep stable: " + timeToKeepStable;
+                yield break;
+            }
 
             stabilityText.text = "Time to keep stable: " + timeToKeepStable;
             timeToKeepStable -= 1;
@@ -212,20 +255,20 @@ public class WorldThreeManager : MonoBehaviour
         continueButton.gameObject.SetActive(true);
     }
 
-    void CheckLoss()
-    {
-        if (numRabbits <= 2 || numRabbits > 100 || numFoxes >= 20 || numFoxes <= 0)
-        {
-            StopAllCoroutines();
-            playedLoseDialogue = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
-            timePassedSinceLastDialogue = 0f;
-            continueButton.gameObject.SetActive(true);
+    // void CheckLoss()
+    // {
+    //     if (numRabbits <= 2 || numRabbits > 100 || numFoxes >= 20 || numFoxes <= 0)
+    //     {
+    //         StopAllCoroutines();
+    //         playedLoseDialogue = true;
+    //         FindObjectOfType<DialogueManager>().StartDialogue(loseDialogue);
+    //         timePassedSinceLastDialogue = 0f;
+    //         continueButton.gameObject.SetActive(true);
 
-            continueButton.onClick.RemoveAllListeners();
-            continueButton.onClick.AddListener(RestartLevel);
+    //         continueButton.onClick.RemoveAllListeners();
+    //         continueButton.onClick.AddListener(RestartLevel);
 
-        }
-    }
+    //     }
+    // }
 }
 
