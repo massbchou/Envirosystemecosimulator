@@ -180,4 +180,18 @@ public class Snake : Animal
     {
         return Vector3.Distance(transform.position, target);
     }
+
+    public void GoAwayFromTarget()
+    {
+        if (HasNoGoodTarget()) { return; }
+
+        _currentTargetPosition = _currentTarget.transform.position;
+        Vector3 directionToFox = _currentTargetPosition - transform.position;
+        Vector3 directionAwayFromFox = directionToFox.normalized * -1.0f;
+
+        //Vector3 zigzagOffset = zigzagReversed ? Vector3.Cross(directionAwayFromFox, Vector3.up).normalized * -1 : Vector3.Cross(Vector3.up, directionAwayFromFox).normalized * 1;
+
+        _agent.SetDestination(transform.position + directionAwayFromFox);
+
+    }
 }
