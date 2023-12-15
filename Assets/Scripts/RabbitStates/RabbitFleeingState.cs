@@ -6,7 +6,7 @@ public class RabbitFleeingState : RabbitAbstractState
 {
     public override void EnterState(Rabbit animal)
     {
-        animal._currentTarget = animal.FindTarget("Fox");
+        animal._currentTarget = animal.FindRabbitPredator();
     }
 
     public override void UpdateState(Rabbit animal)
@@ -19,7 +19,7 @@ public class RabbitFleeingState : RabbitAbstractState
         }
         else
         {
-            animal._currentTarget = animal.FindTarget("Fox");
+            animal._currentTarget = animal.FindRabbitPredator();
         }
 
         animal.GoAwayFromTarget();
