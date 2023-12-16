@@ -32,7 +32,7 @@ public class Snake : Animal
         //wandering = false;
         base.Start();
         _agent.enabled = true;
-        belly = _maxBelly / 2;
+        belly = _maxBelly / 3;
         //ground = GameObject.Find("Ground");
 
         //initialize to idle state
@@ -84,7 +84,7 @@ public class Snake : Animal
         belly /= 2;
         other.belly /= 2;
 
-        for (int i = 0; i < Random.Range(1, 3); ++i)
+        for (int i = 0; i < Random.Range(1, 2); ++i)
         {
             GameObject newRabbit = Instantiate(_snakePrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
             newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -108,7 +108,7 @@ public class Snake : Animal
         //kill rabbit and increase hunger
         Destroy(rabbit);
 
-        belly += _maxBelly / 2;
+        belly += _maxBelly / 3;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 11%, but not over double

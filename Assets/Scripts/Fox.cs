@@ -84,7 +84,7 @@ public class Fox : Animal
         belly /= 2;
         other.belly /= 2;
 
-        for (int i = 0; i < Random.Range(1, 3); ++i)
+        for (int i = 0; i < Random.Range(1, 2); ++i)
         {
             GameObject newRabbit = Instantiate(_foxPrefab, transform.position + new Vector3(1f, 0f, 0f), Quaternion.identity);
             newRabbit.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -108,7 +108,7 @@ public class Fox : Animal
         //kill rabbit and increase hunger
         Destroy(rabbit);
 
-        belly += _maxBelly / 3;
+        belly += _maxBelly / 4;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 11%, but not over double
@@ -125,7 +125,7 @@ public class Fox : Animal
         //destroy plant and increase hunger
         Destroy(plant.transform.parent.gameObject);
 
-        belly += _maxBelly / 6;
+        belly += _maxBelly / 8;
         if (belly > _maxBelly) belly = _maxBelly;
 
         //grow in size by 5%, but not over double

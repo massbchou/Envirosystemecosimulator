@@ -240,7 +240,7 @@ public class WorldTwoManager : MonoBehaviour
 
     void CheckLoss()
     {
-        if (numRabbits <= 2 || numRabbits > 100 || numSnakes >= 20 || numSnakes <= 0)
+        if (numRabbits <= 2 || numRabbits > 100 || numSnakes >= 40 || numSnakes <= 0)
         {
             StopAllCoroutines();
             playedLoseDialogue = true;

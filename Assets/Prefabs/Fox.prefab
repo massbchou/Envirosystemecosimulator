@@ -79,15 +79,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 0}
-  _senseRadius: 15
+  _senseRadius: 12.5
   _targetTag: 
   _ground: {fileID: 0}
   _currentTarget: {fileID: 0}
   _currentTargetPosition: {x: 0, y: 0, z: 0}
   _readyToMate: 0
   isMating: 0
+  isBurrowed: 0
   _eatingDistance: 3
-  _maxBelly: 30
+  _maxBelly: 35
   _foxPrefab: {fileID: 8747189057095279578}
   _matingTime: 1
 --- !u!195 &4440843877694752816
