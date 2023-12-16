@@ -166,7 +166,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 461670918777380785, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2124530911675278846, guid: ffeb2306e8388604d88102892c770f44, type: 3}
       propertyPath: m_Name
@@ -285,9 +285,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2d53442d1bc489caba369708fd668d, type: 3}
---- !u!114 &935868167 stripped
+--- !u!114 &1022215375 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5350745861047520122, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7534561652297606971, guid: ffeb2306e8388604d88102892c770f44, type: 3}
   m_PrefabInstance: {fileID: 202405930}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -528,7 +528,7 @@ MonoBehaviour:
       skills, ability to learn tricks, and adaptability to various environments.
       They can even learn to navigate mazes and solve puzzles.
     audioClips: []
-  continueButton: {fileID: 935868167}
+  continueButton: {fileID: 1022215375}
   plantCounter: {fileID: 2127447206}
   rabbitCounter: {fileID: 1140827159}
   foxCounter: {fileID: 114740790}
