@@ -217,7 +217,7 @@ public class WorldOneManager : MonoBehaviour
 
     void CheckLoss()
     {
-        if (numRabbits <= 2 || numRabbits > 100 || numFoxes >= 20 || numFoxes <= 0)
+        if (numRabbits <= 2 || numRabbits > 120 || numFoxes >= 40 || numFoxes <= 0)
         {
             StopAllCoroutines();
             playedLoseDialogue = true;
