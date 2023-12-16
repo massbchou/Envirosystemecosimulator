@@ -3,15 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Plant
+  - Rabbit
+  - Fox
+  - New tag
+  - P
+  - Rat
+  - Snake
+  - Burrow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Plants
   - 
   - 
   - 

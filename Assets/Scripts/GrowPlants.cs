@@ -6,37 +6,58 @@ public class GrowPlants : MonoBehaviour
 {
     //The plant prefab
     public GameObject plantPrefab;
-    public int maxPlants = 10;
-    public float groundx = 10f;
-    public float groundz = 10f;
-    public float groundy = 0.5f;
+    [SerializeField] private GameObject groundPlane;
+
+    public float growDelay = 1f;
+    
+
+    private Vector3 groundCenter;
+
+    public bool shouldGrowPlants = false;
+    bool growing = false;
+
+    Ground ground;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Get the ground's corners
+        ground = groundPlane.GetComponent<Ground>();
+
+        groundCenter = ground._center;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //Generate a random number between 0 and 1
-        float randomNumber = Random.Range(0f, 1f);
-        
-        //if bigger than 0.99, then grow a new plant
-        if (randomNumber > 0.99f)
+        if(shouldGrowPlants && !growing)
+        {
+            StartCoroutine(GrowPlantsCoroutine());
+            growing = true;
+        }
+        if(!shouldGrowPlants && growing)
+        {
+            StopCoroutine(GrowPlantsCoroutine());
+            growing = false;
+        }
+    }
+
+    IEnumerator GrowPlantsCoroutine()
+    {
+        while (true)
         {
             GrowNewPlant();
+            yield return new WaitForSeconds(growDelay + Random.Range(-0.5f, 0.5f));
         }
     }
     
     void GrowNewPlant()
     {
+        float randX = Random.Range(ground.groundXMin, ground.groundXMax);
+        float randZ = Random.Range(ground.groundZMin, ground.groundZMax);
+        float terrainY = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
+        //Instantiate a new plant with scale 0.1, at a random position on the ground and a random rotation
+        Instantiate(plantPrefab, new Vector3(randX, terrainY, randZ), Quaternion.Euler(0, Random.Range(0, 360), 0));
         
-        //Instantiate a new plant with scale 0.1, at a random position on the ground
-        Instantiate(plantPrefab, new Vector3(Random.Range(-groundx, groundx), groundy, Random.Range(-groundz, groundz)), Quaternion.identity);
-        
-        
-
-
     }
 }
