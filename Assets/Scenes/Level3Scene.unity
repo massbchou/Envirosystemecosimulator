@@ -177,8 +177,7 @@ MonoBehaviour:
   funFact0:
     name: David Attenborough
     sentences:
-    - We learnt that rabbits use burrows to hide, did you know rats often make burrows
-      in order to mate and keep safe.
+    - 'Did you know prey often use burrows to hide from predators. '
     - Let's place some rats and see them dig holes!
     audioClips: []
   funFact1:
@@ -191,7 +190,7 @@ MonoBehaviour:
   winDialogue:
     name: David Attenborough
     sentences:
-    - win
+    - Congratulations you kept the ecosystem stable
     audioClips: []
   loseDialogue:
     name: David Attenborough
@@ -202,9 +201,22 @@ MonoBehaviour:
   plantCounter: {fileID: 765920047}
   rabbitCounter: {fileID: 1360600745}
   foxCounter: {fileID: 1322434669}
+  ratCounter: {fileID: 682817200}
+  snakeCounter: {fileID: 1107635194}
   stabilityText: {fileID: 2114730759}
-  timeToMakeStable: 20
+  timeToMakeStable: 0
   timeToKeepStable: 60
+--- !u!114 &682817200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343411256933689701, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+  m_PrefabInstance: {fileID: 925986231}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &697776283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3041376971046276843, guid: ffeb2306e8388604d88102892c770f44, type: 3}
@@ -322,6 +334,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 526005410}
   m_SourcePrefab: {fileID: 100100000, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+--- !u!114 &1107635194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1825362317028364690, guid: ffeb2306e8388604d88102892c770f44, type: 3}
+  m_PrefabInstance: {fileID: 925986231}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1146455064 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7534561652297606971, guid: ffeb2306e8388604d88102892c770f44, type: 3}
