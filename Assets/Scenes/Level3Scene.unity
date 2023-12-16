@@ -178,20 +178,25 @@ MonoBehaviour:
     name: David Attenborough
     sentences:
     - 'Did you know prey often use burrows to hide from predators. '
-    - Let's place some rats and see them dig holes!
-    audioClips: []
+    - Let's place some rats and see them dig holes, that Rabbits can use thes holes
+      to hide.
+    audioClips:
+    - {fileID: 8300000, guid: d8ef6caf8ff7440d8ae7f632507af85d, type: 3}
+    - {fileID: 8300000, guid: 38660a9bbffe6460cb4f8ec02becc385, type: 3}
   funFact1:
     name: David Attenborough
     sentences:
     - "Now that we\u2019ve introduce four different animals, lets maintain a balanced
       ecosystem for 60 seconds with foxes, rabbits, snakes and rats make sure no
       animal goes extinct! "
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: f5985bb7c581c4e0a9cce4f5a1c66020, type: 3}
   winDialogue:
     name: David Attenborough
     sentences:
     - Congratulations you kept the ecosystem stable
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: b4f590dc2738540b7b0039519cd0e00b, type: 3}
   loseDialogue:
     name: David Attenborough
     sentences:

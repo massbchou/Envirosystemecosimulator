@@ -509,25 +509,29 @@ MonoBehaviour:
     - "Now that you\u2019ve completed all levels feel free to place as many rabbits,
       snakes or foxes as you want! This level has no rules except for the occasional
       fun fact that pops up"
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: b386aaa7e66504e2d98686eba02cb34c, type: 3}
   funFact1:
     name: David Attenborough
     sentences:
     - Some larger species of snakes can consume prey that is much larger than their
       head and sometimes the digestion process can take up to several weeks!
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 7125e6674e3b644338262c3bc0304dd7, type: 3}
   winDialogue:
     name: David Attenborough
     sentences:
     - Foxes can sprint at speeds up to 31 miles per hour!
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 706a7781aec2941a9bdc51d3687550bc, type: 3}
   loseDialogue:
     name: David Attenborough
     sentences:
     - Rats are highly intelligent animals. They are known for their problem-solving
       skills, ability to learn tricks, and adaptability to various environments.
       They can even learn to navigate mazes and solve puzzles.
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 48b502d2bdc1f48cbb2945c36396cfa8, type: 3}
   continueButton: {fileID: 1022215375}
   plantCounter: {fileID: 2127447206}
   rabbitCounter: {fileID: 1140827159}

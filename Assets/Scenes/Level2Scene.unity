@@ -150,7 +150,10 @@ MonoBehaviour:
       suggests that snakes evolved from a lizard-like ancestor around 150 million
       years ago!
     - ' Now let''s go ahead and place some. See if you can reduce the Rabbit population.'
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 016bbbf9b15ab4e509e13c3f878756ca, type: 3}
+    - {fileID: 8300000, guid: 0bdf3c5b645224deabd773c051f0eb46, type: 3}
+    - {fileID: 8300000, guid: 640d0ef925bc74f8db500d3a82433c47, type: 3}
   funFact1:
     name: David Attenborough
     sentences:
@@ -158,17 +161,22 @@ MonoBehaviour:
     - Try to keep the population of all animals in balance! Don't let any population
       get too high or too low
     - In this arid environment, you'll have to supply plants manually. Good luck!
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: ac4a77d7a662f415cbceca785255649c, type: 3}
+    - {fileID: 8300000, guid: b578aa6f65c8f48c8b00d32a34068503, type: 3}
+    - {fileID: 8300000, guid: f3257093cf94544c3b806bcfe28ac409, type: 3}
   winDialogue:
     name: David Attenborough
     sentences:
     - Nice job, you balanced the ecosystem! You can go on to the next level.
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 1fb39f995980e4c19818423f4b44642a, type: 3}
   loseDialogue:
     name: David Attenborough
     sentences:
     - Looks like the ecosystem wasn't balanced properly. Try again!
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 6ca51177fa3fe45d1a1d7afcd6ca96e1, type: 3}
   continueButton: {fileID: 1296722296}
   plantCounter: {fileID: 679781266}
   rabbitCounter: {fileID: 2057728273}

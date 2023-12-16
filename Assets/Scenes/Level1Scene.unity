@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1945,14 +1945,19 @@ MonoBehaviour:
     - When left unchecked, Rabbits can overwhelm an ecosystem and pose a threat to
       plant wildlife.
     - Watch below as Rabbits reproduce and overwhelm the ecosystem.
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 14a095bd23dd64bf781de31587bbc391, type: 3}
+    - {fileID: 8300000, guid: 6bb4164187c8d4471a0c4d8aa90e30f5, type: 3}
+    - {fileID: 8300000, guid: ffc9a614085314c44a72c6af902409bc, type: 3}
   funFact1:
     name: David Attenborough
     sentences:
     - Now let's place some foxes throughout the ecosystem to try and balance it.
     - Be careful, you only have a limited number of foxes! Make sure they can reproduce
       without overwhelming the ecosystem themselves.
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 4efba616a4d6f4e94bb750bd5520167c, type: 3}
+    - {fileID: 8300000, guid: d42896d9bdc7e4f3eb39ec96b77926f7, type: 3}
   movementTutorial:
     name: David Attenborough
     sentences:
@@ -1960,17 +1965,21 @@ MonoBehaviour:
       click and drag with the mouse to rotate.
     - Don't forget you can place plants as food, even the foxes will eat if they
       are desperate!
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: d5bd036e3a95844d59be3c6e3917ab1b, type: 3}
+    - {fileID: 8300000, guid: ace355c1e2ec24883b145d021b92ebd4, type: 3}
   winDialogue:
     name: David Attenborough
     sentences:
     - Congratulations, you balanced the ecosystem
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 660cc5925e797449daac681047851937, type: 3}
   loseDialogue:
     name: David Attenborough
     sentences:
     - Oops, looks like you overwhelmed the ecosystem. Let's try again
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 7709d5b9be7be4726b30d349eca58848, type: 3}
   continueButton: {fileID: 1391305958}
   plantCounter: {fileID: 1391305957}
   rabbitCounter: {fileID: 1391305956}
