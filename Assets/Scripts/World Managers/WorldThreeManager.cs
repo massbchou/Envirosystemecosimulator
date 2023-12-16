@@ -179,7 +179,7 @@ public class WorldThreeManager : MonoBehaviour
 
     bool isStable()
     {
-        if (numRabbits >=3  && numFoxes >=3 && numRats >= 3 && numSnakes >=3 && numPlants >= 3)
+        if (numRabbits >=1  && numFoxes >=1 && numRats >=1 && numSnakes >=1 && numPlants >=1
         {
             return true;
         }
