@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,7 @@ public class WorldThreeManager : MonoBehaviour
     [SerializeField] int timeToKeepStable = 60;
 
     private int timeSinceStable = 0;
+    private bool keepStable = false;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,8 @@ public class WorldThreeManager : MonoBehaviour
 
         itemPlacer = FindObjectOfType<ItemPlacer>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+
+        itemPlacer.numFoxesAvailable = 10000;
 
         stabilityText.gameObject.SetActive(false);
 
@@ -66,7 +70,7 @@ public class WorldThreeManager : MonoBehaviour
 
         plantCounter.text = "Plants: 0";
         rabbitCounter.text = "Rabbits: 0";
-        foxCounter.text = "Foxes: " + numFoxes.ToString() + " (Available: " + itemPlacer.numFoxesAvailable + ")";
+        foxCounter.text = "Foxes: " + numFoxes.ToString();
 
     }
 
@@ -109,10 +113,10 @@ public class WorldThreeManager : MonoBehaviour
             itemPlacer.EnableSnakeButton();
         }
 
-        if (playedFact0 && playedFact1 && !playedWinDialogue)
+        if (playedFact0 && playedFact1 && !playedWinDialogue && !keepStable)
         {
-            Debug.Log("Stated coroutine");
             StartCoroutine(KeepStableCounter());
+            keepStable = true;
         }
 
         // if (playedFact0 && playedFact1 && isStable())
@@ -206,32 +210,12 @@ public class WorldThreeManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    IEnumerator MakeStableCounter()
-    {
-        while (dialogueManager.IsInDialogue())
-        {
-            yield return null;
-        }
-
-        stabilityText.gameObject.SetActive(true);
-
-        while (timeToMakeStable > 0)
-        {
-            stabilityText.text = "Time to make stable: " + timeToMakeStable;
-            timeToMakeStable -= 1;
-            yield return new WaitForSeconds(1);
-        }
-
-        StartCoroutine(KeepStableCounter());
-    }
-
     IEnumerator KeepStableCounter()
     {
+        
+        
         stabilityText.gameObject.SetActive(true);
-        while (dialogueManager.IsInDialogue())
-        {
-            yield return null;
-        }
+        
 
         while (timeToKeepStable > 0)
         {
@@ -240,7 +224,7 @@ public class WorldThreeManager : MonoBehaviour
                 timeToKeepStable = 60;
                 // StartCoroutine(MakeStableCounter());
                 stabilityText.text = "Time to keep stable: " + timeToKeepStable;
-                yield break;
+                yield return new WaitForSeconds(1);
             }
 
             stabilityText.text = "Time to keep stable: " + timeToKeepStable;
